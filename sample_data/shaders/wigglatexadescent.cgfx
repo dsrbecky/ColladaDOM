@@ -1,0 +1,153 @@
+
+float4x4 WorldITXf : WorldInverseTranspose;
+float4x4 WorldViewProjXf : WorldViewProjection;
+float4x4 WorldXf : World;
+
+/// color params
+
+float3 LiteColor : Diffuse <
+	string UIName =  "Bright Surface Color";
+	string UIWidget = "Color";
+> = {0.5f, 0.0f, 0.5f};
+
+float3 DarkColor : Diffuse <
+	string UIName =  "Dark Surface Color";
+	string UIWidget = "Color";
+> = {0.0f, 0.0f, 0.0f};
+
+float3 WarmColor : Diffuse <
+	string UIName =  "Gooch warm tone";
+	string UIWidget = "Color";
+> = {0.5f, 0.5f, 0.0f};
+
+float3 CoolColor : Diffuse <
+	string UIName =  "Gooch cool tone";
+	string UIWidget = "Color";
+> = {0.0f, 0.0f, 0.0f};
+
+float4 LightPos : Position <
+	string Object = "PointLight";
+	string UIName = "Lamp Position";
+	string Space = "World";
+> = {100.0f, 100.0f, 100.0f, 0.0f};
+
+
+/****************************************************/
+/********** SAMPLERS ********************************/
+/****************************************************/
+
+texture ColorTex : Diffuse
+<
+	string ResourceName = "default_color.dds";
+	string ResourceType = "2D";
+>;
+
+sampler2D ColorSampler = sampler_state
+{
+	Texture = <ColorTex>;
+  	MagFilter = Linear;
+  	MinFilter = LinearMipmapLinear;
+};
+
+/// wiggly params
+
+float Timer : Time < string UIWidget="None"; >;
+
+float Amplitude <
+    string UIWidget = "slider";
+    float UIMin = 0.001;
+    float UIMax = 2;
+    float UIStep = 0.0011;
+> = 0.0358f;
+
+float Frequency <
+    string UIWidget = "slider";
+    float UIMin = 0.001;
+    float UIMax = 1.0;
+    float UIStep = 0.01;
+> = 0.0906;
+
+/////////////////////////////////////////////////
+/// structures //////////////////////////////////
+/////////////////////////////////////////////////
+
+struct appdata 
+{
+	float3 Position	: POSITION;
+	float4 Normal	: NORMAL;
+    float4 UV		: TEXCOORD0;
+};
+
+struct vertexOutput 
+{
+	float4 HPosition	: POSITION;
+	float4 diffCol		: COLOR0;
+    float2 UV		: TEXCOORD0;
+};
+
+/////////////////////////////////////////////////
+// Shaders //////////////////////////////////////
+/////////////////////////////////////////////////
+
+vertexOutput wtdVS(appdata IN)
+{
+	vertexOutput OUT;
+	float3 Nn = normalize(mul(WorldITXf, IN.Normal).xyz);
+	
+	float4 Po = float4(IN.Position.xyz,1);
+    float axis = Po.x / Frequency + Timer;
+    //float wiggleZ = sin(axis) * Vertical;
+    //float wiggleY = cos(iny) * Horizontal; // deriv
+    float wiggleY = cos(axis) * Amplitude; // .0358f; //deriv
+    Nn.y = Nn.y + wiggleY;
+    Nn = normalize(Nn);
+    //Po.x = Po.x + wiggleX;
+	Po.y = Po.y + wiggleY;
+
+	//float4 Po = float4(IN.Position.xyz,1);
+	//compute worldspace position
+	float3 Pw = mul(WorldXf, Po).xyz;
+	float3 Ln = normalize(LightPos - Pw).xyz;
+	float3 Un = float3(0,1,0);
+	float mixerLight = 0.5 * (dot(Ln,Nn) + 1.0);
+	float mixerUp = 0.5 * (dot(Un,Nn) + 1.0);
+	float3 surfColor = lerp(DarkColor,LiteColor,mixerLight);
+	float3 toneColor = lerp(CoolColor,WarmColor,mixerUp);
+	float3 texColor = float3(0, IN.UV.x, IN.UV.y);
+	float3 mixColor = surfColor + toneColor + texColor;
+	OUT.diffCol = float4(mixColor.xyz,1.0f);
+	//OUT.diffCol = float4(Amplitude, 1, Amplitude, 1.0);
+	OUT.HPosition = mul(WorldViewProjXf ,Po);
+	OUT.UV = IN.UV.xy;
+	return OUT;
+}
+
+float4 wtdFS(vertexOutput IN) : COLOR
+{
+	float4 map = tex2D(ColorSampler,IN.UV.xy);
+	float4 surf = IN.diffCol;
+	float grey = (map.x + map.y + map.z) / 3.0f;
+	//return float4(1.0f - grey);
+	//grey = cos(grey);//1.0f - grey;
+	return float4(0.5f * grey) + (0.5f * surf);
+	//return ((0.5f * surf) + (0.5 * float4(grey) * surf));
+	
+	return IN.diffCol;
+}
+
+/////////////////////////////////////////////////
+/// Techniques //////////////////////////////////
+/////////////////////////////////////////////////
+
+technique PixelShaderVersion {
+	pass {
+		DepthTestEnable = true;	
+		DepthFunc = LEqual;
+		VertexProgram = compile arbvp1 wtdVS();
+		FragmentProgram = compile arbfp1 wtdFS(); // somewhat gratuitous
+   }
+}
+
+/////////////////////////////////////////////////
+///////////////////////////////////////// eof ///
+/////////////////////////////////////////////////
