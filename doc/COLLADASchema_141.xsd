@@ -5505,6 +5505,7 @@
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
 	<!-- COLLADA FX GLSL elements                  -->
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+  <!--
 	<xs:simpleType name="GL_MAX_LIGHTS_index">
 		<xs:restriction base="xs:nonNegativeInteger">
 			<xs:minInclusive value="0"/>
@@ -7339,6 +7340,7 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
+  -->
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
 	<!-- COLLADA FX common profile                   -->
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
@@ -7554,6 +7556,7 @@
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
 	<!-- COLLADA FX Cg elements                      -->
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+  <!--
 	<xs:simpleType name="cg_bool">
 		<xs:restriction base="xs:boolean"/>
 	</xs:simpleType>
@@ -7570,7 +7573,6 @@
 		<xs:restriction base="xs:float">
 			<xs:minInclusive value="-2.0"/>
 			<xs:maxInclusive value="2.0"/>
-			<!-- as defined for fp30 profile -->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="cg_bool1">
@@ -7589,7 +7591,6 @@
 		<xs:restriction base="xs:float">
 			<xs:minInclusive value="-2.0"/>
 			<xs:maxInclusive value="2.0"/>
-			<!-- as defined for fp30 profile -->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="cg_ListOfBool">
@@ -8215,7 +8216,6 @@
 	</xs:simpleType>
 	<xs:simpleType name="cg_identifier">
 		<xs:restriction base="xs:token"/>
-		<!-- type used to represent identifiers in Cg, e.g. "myLight.bitmap[2].width" -->
 	</xs:simpleType>
 	<xs:complexType name="cg_connect_param">
 		<xs:annotation>
@@ -8762,10 +8762,12 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
+  -->
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
 	<!-- COLLADA FX GLES elements                  -->
 	<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
 	<!-- these maximum values are from the GL.h from Khronos. Not all of them are defined in the spec -->
+  <!--
 	<xs:simpleType name="GLES_MAX_LIGHTS_index">
 		<xs:restriction base="xs:nonNegativeInteger">
 			<xs:minInclusive value="0"/>
@@ -9098,7 +9100,6 @@
 			<xs:element name="magfilter" type="fx_sampler_filter_common" default="NONE" minOccurs="0"/>
 			<xs:element name="mipfilter" type="fx_sampler_filter_common" default="NONE" minOccurs="0"/>
 			<xs:element name="mipmap_maxlevel" type="xs:unsignedByte" default="255" minOccurs="0"/>
-			<!-- perhaps bias not really supported but can be kludged in the app somewhat-->
 			<xs:element name="mipmap_bias" type="xs:float" default="0.0" minOccurs="0"/>
 			<xs:element ref="extra" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
@@ -9677,7 +9678,6 @@
 			</xs:element>
 		</xs:choice>
 	</xs:group>
-	<!-- - - - - - - - - - - - - - - - - - - - -->
 	<xs:group name="gles_basic_type_common">
 		<xs:annotation>
 			<xs:documentation>
@@ -9861,6 +9861,7 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
+  -->
 	<!-- COLLADA Physics -->
 	<!-- new geometry types -->
 	<xs:element name="box">
