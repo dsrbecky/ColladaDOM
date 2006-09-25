@@ -89,20 +89,20 @@ namespace xsd2net
 		/// Finds the field which is used as a return value for the property
 		/// </summary>
 		protected virtual CodeMemberField GetFieldForProperty(CodeTypeDeclaration type, CodeMemberProperty property) {
-            foreach (CodeStatement statement in property.GetStatements) {
+			foreach (CodeStatement statement in property.GetStatements) {
 				CodeMethodReturnStatement returnStatement = statement as CodeMethodReturnStatement;
 				if (returnStatement == null) continue;
 				
 				CodeFieldReferenceExpression fieldRef = returnStatement.Expression as CodeFieldReferenceExpression;
-                if (fieldRef == null) continue;
-                
+				if (fieldRef == null) continue;
+				
 				foreach (CodeTypeMember member in type.Members) {
 					if (member is CodeMemberField && member.Name == fieldRef.FieldName) {
 						return (CodeMemberField)member;
 					}
 				}
-            }
-            return null;
-        }
+			}
+			return null;
+		}
 	}
 }

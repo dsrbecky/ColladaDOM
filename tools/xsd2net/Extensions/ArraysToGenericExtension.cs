@@ -31,14 +31,14 @@ namespace xsd2net
 					// if
 					new CodeConditionStatement(
 						// field == null
-	                    new CodeBinaryOperatorExpression(
+						new CodeBinaryOperatorExpression(
 							new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), field.Name),
 							CodeBinaryOperatorType.IdentityEquality,
 							new CodePrimitiveExpression(null)),
 						// field = new List<T>();
 						new CodeAssignStatement(
 							new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), field.Name),
-	            			new CodeObjectCreateExpression(genericType))));	
+							new CodeObjectCreateExpression(genericType))));	
 			}
 		}
 	}
