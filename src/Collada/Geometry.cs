@@ -13,10 +13,10 @@ namespace Collada
 {
 	public partial class Geometry
 	{
-		public void Render()
+		public void Render(InstanceGeometry instanceGeometry)
 		{
 			if (this.Item is Mesh) {
-				((Mesh)this.Item).Render();
+				((Mesh)this.Item).Render(instanceGeometry);
 			}
 		}
 	}

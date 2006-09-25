@@ -66,6 +66,7 @@
     <Compile Include="Collada\Mesh.cs" />
     <Compile Include="Collada\Polylist.cs" />
     <Compile Include="Collada\VisualScene.cs" />
+    <Compile Include="Collada\CommonColorOrTextureTypeColor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Viewer" />

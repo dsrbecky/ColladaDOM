@@ -8,11 +8,11 @@ namespace Collada
 {
 	public partial class Mesh
 	{
-		public void Render()
+		public void Render(InstanceGeometry instanceGeometry)
 		{
 			foreach(object item in this.Items) {
 				if (item is Polylist) {
-					((Polylist)item).Render();
+					((Polylist)item).Render(instanceGeometry);
 				}
 			}
 		}

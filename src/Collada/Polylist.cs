@@ -37,8 +37,12 @@ namespace Collada
 			}
 		}
 		
-		public void Render()
+		public void Render(InstanceGeometry instanceGeometry)
 		{
+			if (this.Material != null) {
+				instanceGeometry.UseMaterial(this.Material);
+			}
+			
 			ulong  pStride = 0;
 			ulong  positionOffset = 0;
 			Source positionSource = null;
@@ -81,7 +85,7 @@ namespace Collada
 			foreach(ulong vcount in vcounts) {
 				Gl.glBegin(Gl.GL_POLYGON); {
 					for(ulong vertex = 0; vertex < vcount; vertex++) {
-						Gl.glColor3f(1.0f - 0.2f * vertex, 1.0f - 0.2f * vertex, 1.0f - 0.2f * vertex);
+						//Gl.glColor3f(1.0f - 0.2f * vertex, 1.0f - 0.2f * vertex, 1.0f - 0.2f * vertex);
 						ulong posIndex = p[pIndex + positionOffset] * 3;
 						Gl.glVertex3d(positions[posIndex] / scale,
 						              positions[posIndex+1] / scale,
