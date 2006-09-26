@@ -35,19 +35,19 @@ namespace Collada
 			
 			LightTechniqueCommonAmbient ambient = this.TechniqueCommon.Item as LightTechniqueCommonAmbient;
 			if (ambient != null) {
-				float[] color = ambient.Color.Value;
+				float[] color = ambient.Color.ValuesAsFloats;
 				Gl.glLightfv(light, Gl.GL_AMBIENT,  new float[] {color[0], color[1], color[2], 1.0f});
 				Gl.glLightfv(light, Gl.GL_DIFFUSE,  new float[] {0.0f, 0.0f, 0.0f, 1.0f});
 				Gl.glLightfv(light, Gl.GL_SPECULAR, new float[] {0.0f, 0.0f, 0.0f, 1.0f});
 			}
 			LightTechniqueCommonDirectional directional = this.TechniqueCommon.Item as LightTechniqueCommonDirectional;
 			if (directional != null) {
-				float[] color = directional.Color.Value;
+				float[] color = directional.Color.ValuesAsFloats;
 				Gl.glLightfv(light, Gl.GL_DIFFUSE, new float[] {color[0], color[1], color[2], 1.0f});
 			}
 			LightTechniqueCommonPoint point = this.TechniqueCommon.Item as LightTechniqueCommonPoint;
 			if (point != null) {
-				float[] color = point.Color.Value;
+				float[] color = point.Color.ValuesAsFloats;
 				Gl.glLightfv(light, Gl.GL_DIFFUSE,  new float[] {color[0], color[1], color[2], 1.0f});
 				Gl.glLightfv(light, Gl.GL_POSITION, new float[] {0.0f, 0.0f, 0.0f, 1.0f});
 				Gl.glLightf (light, Gl.GL_CONSTANT_ATTENUATION,  (float)point.ConstantAttenuation.Value);
@@ -56,7 +56,7 @@ namespace Collada
 			}
 			LightTechniqueCommonSpot spot = this.TechniqueCommon.Item as LightTechniqueCommonSpot;
 			if (spot != null) {
-				float[] color = spot.Color.Value;
+				float[] color = spot.Color.ValuesAsFloats;
 				Gl.glLightfv(light, Gl.GL_DIFFUSE,  new float[] {color[0], color[1], color[2], 1.0f});
 				Gl.glLightfv(light, Gl.GL_POSITION, new float[] {0.0f, 0.0f, 0.0f, 1.0f});
 				Gl.glLightf (light, Gl.GL_SPOT_EXPONENT,         (float)spot.FalloffExponent.Value);

@@ -72,14 +72,12 @@ namespace Collada
 					normalSource = Source.IDs[input.Source.Remove(0,1)];
 				}
 			}
-			float[] positions = (positionSource.Item as FloatArray).Floats;
-			float[] normals   = (normalSource.Item as FloatArray).Floats;
+			float[] positions = (positionSource.Item as FloatArray).ValuesAsFloats;
+			float[] normals   = (normalSource.Item as FloatArray).ValuesAsFloats;
 			
 			
 			ulong[] vcounts = this.VcountArray;
 			ulong[] p = this.PArray;
-			
-			double scale = 200;
 			
 			ulong pIndex = 0;
 			foreach(ulong vcount in vcounts) {
@@ -91,9 +89,9 @@ namespace Collada
 						              normals[nomIndex+1],
 						              normals[nomIndex+2]);
 						ulong posIndex = p[pIndex + positionOffset] * 3;
-						Gl.glVertex3d(positions[posIndex] / scale,
-						              positions[posIndex+1] / scale,
-						              positions[posIndex+2] / scale);
+						Gl.glVertex3d(positions[posIndex],
+						              positions[posIndex+1],
+						              positions[posIndex+2]);
 						pIndex += pStride;
 					}
 				}

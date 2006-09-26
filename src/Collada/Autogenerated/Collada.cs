@@ -365,6 +365,29 @@ namespace Collada {
         
         private string textField;
         
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Double[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Double[] values = new System.Double[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Double.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Single[] ValuesAsFloats {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Single[] values = new System.Single[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Single.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        
         /// <summary>The sid attribute is a text string value containing the sub-identifier of this element. 
         ///This value must be unique within the scope of the parent element. Optional attribute.
         ///</summary>
@@ -1471,6 +1494,29 @@ namespace Collada {
         private string sidField;
         
         private string textField;
+        
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Double[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Double[] values = new System.Double[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Double.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Single[] ValuesAsFloats {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Single[] values = new System.Single[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Single.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
         
         [System.Xml.Serialization.XmlAttributeAttribute("sid", DataType="NCName")]
         public string Sid {
@@ -4355,6 +4401,12 @@ namespace Collada {
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, NameArray> IDs = new System.Collections.Generic.Dictionary<string, NameArray>();
+        [System.Xml.Serialization.XmlIgnore]
+        public System.String[] Values {
+            get {
+                return this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+            }
+        }
         
         /// <summary>The id attribute is a text string containing the unique identifier of this element. 
         ///This value must be unique within the instance document. Optional attribute.
@@ -4424,6 +4476,17 @@ namespace Collada {
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, BoolArray> IDs = new System.Collections.Generic.Dictionary<string, BoolArray>();
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Boolean[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Boolean[] values = new System.Boolean[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Boolean.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
         
         /// <summary>The id attribute is a text string containing the unique identifier of this element. 
         ///This value must be unique within the instance document. Optional attribute.
@@ -4497,6 +4560,28 @@ namespace Collada {
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, FloatArray> IDs = new System.Collections.Generic.Dictionary<string, FloatArray>();
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Double[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Double[] values = new System.Double[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Double.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Single[] ValuesAsFloats {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Single[] values = new System.Single[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Single.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
         
         public FloatArray() {
             this.digitsField = ((short)(6));
@@ -4603,6 +4688,17 @@ namespace Collada {
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, IntArray> IDs = new System.Collections.Generic.Dictionary<string, IntArray>();
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Int64[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Int64[] values = new System.Int64[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Int64.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
         
         public IntArray() {
             this.minInclusiveField = "-2147483648";
@@ -10206,6 +10302,29 @@ namespace Collada {
         
         private string textField;
         
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Double[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Double[] values = new System.Double[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Double.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Single[] ValuesAsFloats {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Single[] values = new System.Single[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Single.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        
         /// <summary>The sid attribute is a text string value containing the sub-identifier of this element. 
         ///This value must be unique within the scope of the parent element. Optional attribute.
         ///</summary>
@@ -10245,6 +10364,29 @@ namespace Collada {
         
         private string textField;
         
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Double[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Double[] values = new System.Double[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Double.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Single[] ValuesAsFloats {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Single[] values = new System.Single[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Single.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        
         /// <summary>The sid attribute is a text string value containing the sub-identifier of this element. 
         ///This value must be unique within the scope of the parent element. Optional attribute.
         ///</summary>
@@ -10282,6 +10424,29 @@ namespace Collada {
         private string sidField;
         
         private string textField;
+        
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Double[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Double[] values = new System.Double[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Double.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Single[] ValuesAsFloats {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Single[] values = new System.Single[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Single.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
         
         /// <summary>The sid attribute is a text string value containing the sub-identifier of this element. 
         ///This value must be unique within the scope of the parent element. Optional attribute.
@@ -10321,6 +10486,29 @@ namespace Collada {
         private string sidField;
         
         private string textField;
+        
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Double[] Values {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Double[] values = new System.Double[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Double.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnore]
+        public System.Single[] ValuesAsFloats {
+            get {
+                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                System.Single[] values = new System.Single[txts.Length];
+                for(int i = 0; i < txts.Length; i++) {
+                    values[i] = System.Single.Parse(txts[i]);
+                }
+                return values;
+            }
+        }
         
         /// <summary>The sid attribute is a text string value containing the sub-identifier of this element. 
         ///This value must be unique within the scope of the parent element. Optional attribute.

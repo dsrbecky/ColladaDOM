@@ -79,13 +79,15 @@ namespace Viewer
 
 		void Reshape(int w, int h)
 		{
+			float size = 200f;
+			
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			Gl.glLoadIdentity();
 			if(w <= h) {
-				Gl.glOrtho(-1.5, 1.5, -1.5 * (float) h / (float) w, 1.5 * (float) h / (float) w, -10.0, 10.0);
+				Gl.glOrtho(-size, size, -size * (float) h / (float) w, size * (float) h / (float) w, -10.0 * size, 10.0 * size);
 			} else {
-				Gl.glOrtho(-1.5 * (float) w / (float) h, 1.5 * (float) w / (float) h, -1.5, 1.5, -10.0, 10.0);
+				Gl.glOrtho(-size * (float) w / (float) h, size * (float) w / (float) h, -size, size, -10.0 * size, 10.0 * size);
 			}
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity ();
