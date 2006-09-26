@@ -51,8 +51,9 @@ namespace Viewer
 		{
 			Gl.glClearColor(0.449f, 0.449f, 0.449f, 0.0f);
 			Gl.glShadeModel(Gl.GL_SMOOTH);
-
+			
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			Gl.glEnable(Gl.GL_LIGHTING);
 		}
 		
 		void Display()

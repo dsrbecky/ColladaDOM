@@ -83,20 +83,21 @@ namespace Collada
 			
 			ulong pIndex = 0;
 			foreach(ulong vcount in vcounts) {
-				Gl.glBegin(Gl.GL_POLYGON); {
+				Gl.glBegin(Gl.GL_POLYGON);
+				{
 					for(ulong vertex = 0; vertex < vcount; vertex++) {
-						//Gl.glColor3f(1.0f - 0.2f * vertex, 1.0f - 0.2f * vertex, 1.0f - 0.2f * vertex);
-						ulong posIndex = p[pIndex + positionOffset] * 3;
-						Gl.glVertex3d(positions[posIndex] / scale,
-						              positions[posIndex+1] / scale,
-						              positions[posIndex+2] / scale);
 						ulong nomIndex = p[pIndex + normalOffset] * 3;
 						Gl.glNormal3d(normals[nomIndex],
 						              normals[nomIndex+1],
 						              normals[nomIndex+2]);
+						ulong posIndex = p[pIndex + positionOffset] * 3;
+						Gl.glVertex3d(positions[posIndex] / scale,
+						              positions[posIndex+1] / scale,
+						              positions[posIndex+2] / scale);
 						pIndex += pStride;
 					}
-				} Gl.glEnd();
+				}
+				Gl.glEnd();
 			}
 		}
 	}

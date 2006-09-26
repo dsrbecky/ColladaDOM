@@ -67,6 +67,8 @@
     <Compile Include="Collada\Polylist.cs" />
     <Compile Include="Collada\VisualScene.cs" />
     <Compile Include="Collada\CommonColorOrTextureTypeColor.cs" />
+    <Compile Include="Collada\Light.cs" />
+    <Compile Include="Collada\TargetableFloat3.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Viewer" />

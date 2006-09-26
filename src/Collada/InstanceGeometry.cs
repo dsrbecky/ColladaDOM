@@ -31,8 +31,12 @@ namespace Collada
 			Effect effect = Effect.IDs[material.InstanceEffect.Url.Remove(0,1)];
 			EffectFxProfileAbstractProfileCOMMONTechniquePhong phong = effect.Items[0].Technique.Item as EffectFxProfileAbstractProfileCOMMONTechniquePhong;
 			if (phong != null) {
-				float[] color = ((CommonColorOrTextureTypeColor)phong.Diffuse.Item).Color;
-				Gl.glColor3f(color[0], color[1], color[2]);
+				Gl.glColor4fv(((CommonColorOrTextureTypeColor)phong.Diffuse.Item).Color);
+				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION , ((CommonColorOrTextureTypeColor)phong.Emission.Item).Color);
+				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_AMBIENT  , ((CommonColorOrTextureTypeColor)phong.Ambient.Item).Color);
+				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_DIFFUSE  , ((CommonColorOrTextureTypeColor)phong.Diffuse.Item).Color);
+				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_SPECULAR , ((CommonColorOrTextureTypeColor)phong.Specular.Item).Color);
+				Gl.glMaterialf (Gl.GL_FRONT_AND_BACK, Gl.GL_SHININESS, (float)((CommonFloatOrParamTypeFloat)phong.Shininess.Item).Value);
 			}
 		}
 		
