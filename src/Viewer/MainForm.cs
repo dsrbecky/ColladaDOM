@@ -22,6 +22,14 @@ namespace Viewer
 		XmlSerializer serializer;
 		COLLADA collada;
 		
+		DateTime startTime = DateTime.Now;
+		
+		TimeSpan RunningTime {
+			get {
+				return DateTime.Now - startTime;
+			}
+		}
+		
 		[STAThread]
 		public static void Main(string[] args)
 		{
@@ -42,6 +50,7 @@ namespace Viewer
 			Glut.glutCreateWindow("Collada Viewer");
 			Init();
 			Glut.glutDisplayFunc(new Glut.DisplayCallback(Display));
+			Glut.glutIdleFunc(new Glut.IdleCallback(Idle));
 			Glut.glutKeyboardFunc(new Glut.KeyboardCallback(Keyboard));
 			Glut.glutReshapeFunc(new Glut.ReshapeCallback(Reshape));
 			Glut.glutMainLoop();
@@ -60,12 +69,20 @@ namespace Viewer
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			Gl.glLoadIdentity();
+			double angle = (RunningTime.TotalSeconds * 360d) / 4d;
+			Gl.glRotated(angle * 0.7, 0, 1.0, 0);
+			Gl.glRotated(angle * 0.3, 0, 1.0, 0.2);
+			
 			collada.Render();
 			
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);
-			Gl.glRotated(15, 2, 3, 0);
-			
 			Gl.glFlush();
+		}
+		
+		void Idle()
+		{
+			Glut.glutPostRedisplay();
 		}
 		
 		void Keyboard(byte key, int x, int y)
@@ -79,7 +96,7 @@ namespace Viewer
 
 		void Reshape(int w, int h)
 		{
-			float size = 200f;
+			float size = 500f;
 			
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);

@@ -68,5 +68,13 @@ namespace Collada
 			
 			Gl.glEnable(light);
 		}
+		
+		public void Render()
+		{
+			Gl.glDisable(Gl.GL_LIGHTING);
+			Gl.glColor3f(1.0f, 1.0f, 0.0f);
+			Tao.FreeGlut.Glut.glutSolidSphere(5.0, 10, 8);
+			Gl.glEnable(Gl.GL_LIGHTING);
+		}
 	}
 }
