@@ -66,6 +66,12 @@
     <Compile Include="Collada\Polylist.cs" />
     <Compile Include="Collada\VisualScene.cs" />
     <Compile Include="Collada\Light.cs" />
+    <Compile Include="Math\Matrix.cs" />
+    <Compile Include="Math\Vector.cs" />
+    <Compile Include="Collada\InstanceWithExtra.cs" />
+    <Compile Include="Collada\Camera.cs" />
+    <Compile Include="Collada\CameraOpticsTechniqueCommonPerspective.cs" />
+    <Compile Include="Collada\CameraOpticsTechniqueCommonOrthographic.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Viewer" />
@@ -75,6 +81,7 @@
       <Link>freeglut.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Folder Include="Math" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

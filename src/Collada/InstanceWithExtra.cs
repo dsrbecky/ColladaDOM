@@ -11,14 +11,17 @@ using Tao.OpenGl;
 
 namespace Collada
 {
-	public partial class Mesh
+	public partial class InstanceWithExtra
 	{
-		public void Render(InstanceGeometry instanceGeometry)
-		{
-			foreach(object item in this.Items) {
-				if (item is Polylist) {
-					((Polylist)item).Render(instanceGeometry);
-				}
+		List<Node> nodePath;
+		
+		[XmlIgnore]
+		public List<Node> NodePath {
+			get {
+				return nodePath;
+			}
+			set {
+				nodePath = value;
 			}
 		}
 	}

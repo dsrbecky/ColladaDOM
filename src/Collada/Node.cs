@@ -13,7 +13,7 @@ namespace Collada
 {
 	public partial class Node
 	{
-		void Transform()
+		public void Transform()
 		{
 			for(int i = 0; i < this.Items.Length; i++) {
 				object item = this.Items[i];
@@ -45,6 +45,19 @@ namespace Collada
 						break;
 				}
 			}
+		}
+		
+		public void GetCameras(List<InstanceWithExtra> cameras, List<Node> nodePath)
+		{
+			nodePath.Add(this);
+			foreach(InstanceWithExtra instanceCamera in this.InstanceCamera) {
+				instanceCamera.NodePath = new List<Node>(nodePath);
+				cameras.Add(instanceCamera);
+			}
+			foreach(Node node in this.Node1) {
+				node.GetCameras(cameras, nodePath);
+			}
+			nodePath.RemoveAt(nodePath.Count - 1);
 		}
 		
 		public void SetupLights(ref int lightCount)

@@ -1,3 +1,8 @@
+// <file>
+//     <copyright name="David Srbecký" email="dsrbecky@gmail.com"/>
+//     <license name="GPL"/>
+// </file>
+
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -49,7 +54,7 @@ namespace Collada
 			ulong  normalOffset = 0;
 			Source normalSource = null;
 			foreach(InputLocalOffset input in this.Input) {
-				pStride = Math.Max(pStride, input.Offset + 1);
+				pStride = System.Math.Max(pStride, input.Offset + 1);
 				if (input.Semantic == "VERTEX") {
 					Vertices vertices = Vertices.IDs[input.Source.Remove(0,1)];
 					foreach(InputLocal vertexInput in vertices.Input) {

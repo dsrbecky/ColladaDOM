@@ -44,7 +44,7 @@ namespace Viewer
 			}
 			
 			Glut.glutInit();
-			Glut.glutInitDisplayMode(Glut.GLUT_SINGLE | Glut.GLUT_RGB | Glut.GLUT_DEPTH);
+			Glut.glutInitDisplayMode(Glut.GLUT_DOUBLE | Glut.GLUT_RGB | Glut.GLUT_DEPTH);
 			Glut.glutInitWindowSize(500, 500);
 			Glut.glutInitWindowPosition(100, 100);
 			Glut.glutCreateWindow("Collada Viewer");
@@ -71,13 +71,13 @@ namespace Viewer
 			
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity();
-			double angle = (RunningTime.TotalSeconds * 360d) / 4d;
-			Gl.glRotated(angle * 0.7, 0, 1.0, 0);
-			Gl.glRotated(angle * 0.3, 0, 1.0, 0.2);
+//			double angle = (RunningTime.TotalSeconds * 360d) / 4d;
+//			Gl.glRotated(angle * 0.7, 0, 1.0, 0);
+//			Gl.glRotated(angle * 0.3, 0, 1.0, 0.2);
 			
 			collada.Render();
 			
-			Gl.glFlush();
+			Glut.glutSwapBuffers();
 		}
 		
 		void Idle()
