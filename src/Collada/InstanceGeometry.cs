@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 
 using Tao.OpenGl;
+using Tao.DevIl;
 
 namespace Collada
 {
@@ -31,10 +32,44 @@ namespace Collada
 			Effect effect = Effect.IDs[material.InstanceEffect.Url.Remove(0,1)];
 			EffectFxProfileAbstractProfileCOMMONTechniquePhong phong = effect.Items[0].Technique.Item as EffectFxProfileAbstractProfileCOMMONTechniquePhong;
 			if (phong != null) {
-				Gl.glColor4fv(((CommonColorOrTextureTypeColor)phong.Diffuse.Item).ValuesAsFloats);
+				CommonColorOrTextureTypeColor color = phong.Diffuse.Item as CommonColorOrTextureTypeColor;
+				CommonColorOrTextureTypeParam param = phong.Diffuse.Item as CommonColorOrTextureTypeParam;
+				CommonColorOrTextureTypeTexture texture = phong.Diffuse.Item as CommonColorOrTextureTypeTexture;
+				if (color != null) {
+					Gl.glColor4fv(color.ValuesAsFloats);
+					Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_DIFFUSE, color.ValuesAsFloats);
+				} else if (texture != null) {
+					FxSampler2DCommon sampler = null;
+					FxSurfaceCommon surface = null;
+					foreach(object item in effect.Items[0].Items) {
+						CommonNewparamType newparam = item as CommonNewparamType;
+						if (newparam != null && newparam.Item is FxSampler2DCommon) {
+							sampler = (FxSampler2DCommon)newparam.Item;
+						}
+					}
+					if (sampler != null) {
+						foreach(object item in effect.Items[0].Items) {
+							CommonNewparamType newparam = item as CommonNewparamType;
+							if (newparam != null && newparam.Item is FxSurfaceCommon &&
+							    newparam.Sid == sampler.Source)
+							{
+								surface = (FxSurfaceCommon)newparam.Item;
+							}
+						}
+					}
+					Image image = Image.IDs[surface.InitFrom[0].Value];
+					
+					Gl.glEnable(Gl.GL_TEXTURE_2D);
+					
+					Il.ilBindImage(1);
+					Il.ilLoadImage(@"..\sample_data\" + (string)image.Item);
+					Ilu.iluFlipImage();
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, 1);
+					Ilut.ilutGLBuildMipmaps();
+				}
+				
 				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION , ((CommonColorOrTextureTypeColor)phong.Emission.Item).ValuesAsFloats);
 				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_AMBIENT  , ((CommonColorOrTextureTypeColor)phong.Ambient.Item).ValuesAsFloats);
-				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_DIFFUSE  , ((CommonColorOrTextureTypeColor)phong.Diffuse.Item).ValuesAsFloats);
 				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_SPECULAR , ((CommonColorOrTextureTypeColor)phong.Specular.Item).ValuesAsFloats);
 				Gl.glMaterialf (Gl.GL_FRONT_AND_BACK, Gl.GL_SHININESS, (float)((CommonFloatOrParamTypeFloat)phong.Shininess.Item).Value);
 			}

@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 
 using Tao.FreeGlut;
 using Tao.OpenGl;
+using Tao.DevIl;
 
 using Collada;
 
@@ -17,7 +18,7 @@ namespace Viewer
 {
 	public class MainForm
 	{
-		string filename = @"..\..\collada\sample_data\multimtl.dae";
+		string filename = @"..\sample_data\seymourplane.dae";
 		
 		XmlSerializer serializer;
 		COLLADA collada;
@@ -63,6 +64,9 @@ namespace Viewer
 			
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			Gl.glEnable(Gl.GL_LIGHTING);
+			
+			Il.ilInit();
+			Ilut.ilutRenderer(Ilut.ILUT_OPENGL);
 		}
 		
 		void Display()

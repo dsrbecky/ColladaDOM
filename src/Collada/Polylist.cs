@@ -53,6 +53,8 @@ namespace Collada
 			Source positionSource = null;
 			ulong  normalOffset = 0;
 			Source normalSource = null;
+			ulong  texcoordOffset = 0;
+			Source texcoordSource = null;
 			foreach(InputLocalOffset input in this.Input) {
 				pStride = System.Math.Max(pStride, input.Offset + 1);
 				if (input.Semantic == "VERTEX") {
@@ -66,6 +68,10 @@ namespace Collada
 							normalOffset = input.Offset;
 							normalSource = Source.IDs[vertexInput.Source.Remove(0,1)];
 						}
+						if (vertexInput.Semantic == "TEXCOORD") {
+							texcoordOffset = input.Offset;
+							texcoordSource = Source.IDs[vertexInput.Source.Remove(0,1)];
+						}
 					}
 				}
 				if (input.Semantic == "POSITION") {
@@ -76,25 +82,47 @@ namespace Collada
 					normalOffset = input.Offset;
 					normalSource = Source.IDs[input.Source.Remove(0,1)];
 				}
+				if (input.Semantic == "TEXCOORD") {
+					texcoordOffset = input.Offset;
+					texcoordSource = Source.IDs[input.Source.Remove(0,1)];
+				}
 			}
-			float[] positions = (positionSource.Item as FloatArray).ValuesAsFloats;
-			float[] normals   = (normalSource.Item as FloatArray).ValuesAsFloats;
+			float[] positions = null;
+			float[] normals = null;
+			float[] texcoords = null;
+			if (positionSource != null) {
+				positions = (positionSource.Item as FloatArray).ValuesAsFloats;
+			}
+			if (normalSource != null) {
+				normals   = (normalSource.Item as FloatArray).ValuesAsFloats;
+			}
+			if (texcoordSource != null) {
+				texcoords = (texcoordSource.Item as FloatArray).ValuesAsFloats;
+			}
 			
 			
 			ulong[] vcounts = this.VcountArray;
 			ulong[] p = this.PArray;
 			
 			ulong pIndex = 0;
+			Random rnd = new Random();
 			foreach(ulong vcount in vcounts) {
 				Gl.glBegin(Gl.GL_POLYGON);
 				{
 					for(ulong vertex = 0; vertex < vcount; vertex++) {
-						ulong nomIndex = p[pIndex + normalOffset] * 3;
-						Gl.glNormal3d(normals[nomIndex],
-						              normals[nomIndex+1],
-						              normals[nomIndex+2]);
+						if (texcoords != null) {
+							ulong texCoordIndex = p[pIndex + texcoordOffset] * 2;
+							Gl.glTexCoord2f(texcoords[texCoordIndex],
+							                texcoords[texCoordIndex+1]);
+						}
+						if (normals != null) {
+							ulong nomIndex = p[pIndex + normalOffset] * 3;
+							Gl.glNormal3f(normals[nomIndex],
+							              normals[nomIndex+1],
+							              normals[nomIndex+2]);
+						}
 						ulong posIndex = p[pIndex + positionOffset] * 3;
-						Gl.glVertex3d(positions[posIndex],
+						Gl.glVertex3f(positions[posIndex],
 						              positions[posIndex+1],
 						              positions[posIndex+2]);
 						pIndex += pStride;
