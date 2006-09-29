@@ -47,5 +47,18 @@ namespace Math
 			this.z = z;
 			this.w = w;
 		}
+		
+		public double Dot(Vector vector)
+		{
+			return this.X * vector.X +
+			       this.Y * vector.Y +
+			       this.Z * vector.Z +
+			       this.W * vector.W;
+		}
+		
+		public static double operator *(Vector vector1, Vector vector2)
+		{
+			return vector1.Dot(vector2);
+		}
 	}
 }

@@ -76,6 +76,8 @@
     <Compile Include="Collada\Camera.cs" />
     <Compile Include="Collada\CameraOpticsTechniqueCommonPerspective.cs" />
     <Compile Include="Collada\CameraOpticsTechniqueCommonOrthographic.cs" />
+    <Compile Include="Collada\Animation.cs" />
+    <Compile Include="Collada\LibraryAnimations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Viewer" />

@@ -33,7 +33,7 @@ dereferenceXRefs=0;cameraXFov=0;cameraYFov=1</comments>
     <library_animations>
         <animation id="prop_rotateZ">
             <source id="prop_rotateZ_prop_rotateZ_ANGLE-input">
-                <float_array id="prop_rotateZ_prop_rotateZ_ANGLE-input-array" count="2">0 0.416667 </float_array>
+                <float_array id="prop_rotateZ_prop_rotateZ_ANGLE-input-array" count="2">0 6 </float_array>
                 <technique_common>
                     <accessor count="2" source="#prop_rotateZ_prop_rotateZ_ANGLE-input-array">
                         <param name="TIME" type="float"/>
@@ -49,7 +49,7 @@ dereferenceXRefs=0;cameraXFov=0;cameraYFov=1</comments>
                 </technique_common>
             </source>
             <source id="prop_rotateZ_prop_rotateZ_ANGLE-intangents">
-                <float_array id="prop_rotateZ_prop_rotateZ_ANGLE-intangents-array" count="2">0 6875.42 </float_array>
+                <float_array id="prop_rotateZ_prop_rotateZ_ANGLE-intangents-array" count="2">0 360 </float_array>
                 <technique_common>
                     <accessor count="2" source="#prop_rotateZ_prop_rotateZ_ANGLE-intangents-array">
                         <param name="ANGLE" type="float"/>
@@ -57,7 +57,7 @@ dereferenceXRefs=0;cameraXFov=0;cameraYFov=1</comments>
                 </technique_common>
             </source>
             <source id="prop_rotateZ_prop_rotateZ_ANGLE-outtangents">
-                <float_array id="prop_rotateZ_prop_rotateZ_ANGLE-outtangents-array" count="2">6875.42 0 </float_array>
+                <float_array id="prop_rotateZ_prop_rotateZ_ANGLE-outtangents-array" count="2">360 0 </float_array>
                 <technique_common>
                     <accessor count="2" source="#prop_rotateZ_prop_rotateZ_ANGLE-outtangents-array">
                         <param name="ANGLE" type="float"/>

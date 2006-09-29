@@ -23,9 +23,9 @@ namespace Viewer
 		XmlSerializer serializer;
 		COLLADA collada;
 		
-		DateTime startTime = DateTime.Now;
+		static DateTime startTime = DateTime.Now;
 		
-		TimeSpan RunningTime {
+		public static TimeSpan RunningTime {
 			get {
 				return DateTime.Now - startTime;
 			}

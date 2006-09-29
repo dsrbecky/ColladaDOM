@@ -13,8 +13,24 @@ namespace Collada
 {
 	public partial class COLLADA
 	{
+		[XmlIgnore]
+		public LibraryAnimations LibraryAnimations {
+			get {
+				foreach(object item in this.Items) {
+					if (item is LibraryAnimations) {
+						return (LibraryAnimations)item;
+					}
+				}
+				return null;
+			}
+		}
+		
 		public void Render()
 		{
+			if (this.LibraryAnimations != null) {
+				this.LibraryAnimations.Animate();
+			}
+			
 			string sceneID = this.Scene.InstanceVisualScene.Url.Remove(0,1);
 			VisualScene scene = VisualScene.IDs[sceneID];
 			scene.Render();
