@@ -20,6 +20,8 @@ namespace Viewer
 	{
 		string filename = @"..\sample_data\seymourplane.dae";
 		
+		long framesRendered = 0;
+		
 		XmlSerializer serializer;
 		COLLADA collada;
 		
@@ -35,6 +37,14 @@ namespace Viewer
 		public static void Main(string[] args)
 		{
 			new MainForm().Show();
+		}
+		
+		~MainForm()
+		{
+			PerformanceLog.Root.Stop();
+			StreamWriter file = new StreamWriter("PerformanceLog.txt");
+			file.Write(PerformanceLog.Root.ToString());
+			file.Close();
 		}
 		
 		public void Show()
@@ -71,17 +81,19 @@ namespace Viewer
 		
 		void Display()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);
-			Gl.glLoadIdentity();
-//			double angle = (RunningTime.TotalSeconds * 360d) / 4d;
-//			Gl.glRotated(angle * 0.7, 0, 1.0, 0);
-//			Gl.glRotated(angle * 0.3, 0, 1.0, 0.2);
-			
-			collada.Render();
-			
-			Glut.glutSwapBuffers();
+			using(PerformanceLog log = new PerformanceLog("Frame " + (framesRendered++))) {
+				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+				
+				Gl.glMatrixMode(Gl.GL_MODELVIEW);
+				Gl.glLoadIdentity();
+	//			double angle = (RunningTime.TotalSeconds * 360d) / 4d;
+	//			Gl.glRotated(angle * 0.7, 0, 1.0, 0);
+	//			Gl.glRotated(angle * 0.3, 0, 1.0, 0.2);
+				
+				collada.Render();
+				
+				Glut.glutSwapBuffers();
+			}
 		}
 		
 		void Idle()

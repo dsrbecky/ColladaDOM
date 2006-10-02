@@ -78,6 +78,8 @@
     <Compile Include="Collada\CameraOpticsTechniqueCommonOrthographic.cs" />
     <Compile Include="Collada\Animation.cs" />
     <Compile Include="Collada\LibraryAnimations.cs" />
+    <Compile Include="Util\HighPrecisionTimer.cs" />
+    <Compile Include="Util\PerformanceLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Viewer" />
@@ -100,6 +102,7 @@
       <Link>ILUT.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Folder Include="Util" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>
