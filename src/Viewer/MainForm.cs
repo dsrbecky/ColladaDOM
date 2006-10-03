@@ -27,6 +27,9 @@ namespace Viewer
 		
 		static DateTime startTime = DateTime.Now;
 		
+		public static double globalScale = 1.0;
+		public static Math.Matrix globalRotation = Math.Matrix.Identity;
+		
 		public static TimeSpan RunningTime {
 			get {
 				return DateTime.Now - startTime;
@@ -64,6 +67,9 @@ namespace Viewer
 			Glut.glutIdleFunc(new Glut.IdleCallback(Idle));
 			Glut.glutKeyboardFunc(new Glut.KeyboardCallback(Keyboard));
 			Glut.glutReshapeFunc(new Glut.ReshapeCallback(Reshape));
+			Glut.glutMotionFunc(Motion);
+			Glut.glutMouseFunc(Mouse);
+			Glut.glutMouseWheelFunc(MouseWheel);
 			Glut.glutMainLoop();
 		}
 		
@@ -88,9 +94,6 @@ namespace Viewer
 				
 				Gl.glMatrixMode(Gl.GL_MODELVIEW);
 				Gl.glLoadIdentity();
-	//			double angle = (RunningTime.TotalSeconds * 360d) / 4d;
-	//			Gl.glRotated(angle * 0.7, 0, 1.0, 0);
-	//			Gl.glRotated(angle * 0.3, 0, 1.0, 0.2);
 				
 				using(PerformanceLog log2 = new PerformanceLog("Render")) {
 					collada.Render();
@@ -116,6 +119,57 @@ namespace Viewer
 				case 27:
 					Environment.Exit(0);
 					break;
+			}
+		}
+		
+		int lastX, lastY;
+		int rotateX, rotateY;
+		
+		void Motion(int x, int y)
+		{
+			rotateX += x - lastX;
+			rotateY += y - lastY;
+			
+			// Load
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			Gl.glLoadIdentity();
+			
+			// Modify
+			Gl.glRotated(rotateY * -0.5, 1, 0, 0);
+			Gl.glRotated(rotateX * -0.5, 0, 1, 0);
+			
+			// Save
+			double[] elements = new double[16];
+			Gl.glGetDoublev(Gl.GL_MODELVIEW_MATRIX, elements);
+			globalRotation = new Math.Matrix(elements);
+			
+			lastX = x;
+			lastY = y;
+		}
+		
+		void Mouse(int button, int state, int x, int y)
+		{
+			if (state == Glut.GLUT_DOWN) {
+				switch (button) {
+					case Glut.GLUT_LEFT_BUTTON:
+						break;
+					case Glut.GLUT_MIDDLE_BUTTON:
+						break;
+					case Glut.GLUT_RIGHT_BUTTON:
+						break;
+				}
+			} else {
+			}
+			lastX = x;
+			lastY = y;
+		}
+		
+		void MouseWheel(int wheel, int direction, int x, int y)
+		{
+			if (direction > 0) {
+				globalScale /= 1.2;
+			} else {
+				globalScale *= 1.2;
 			}
 		}
 

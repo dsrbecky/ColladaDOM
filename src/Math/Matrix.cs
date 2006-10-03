@@ -12,6 +12,11 @@ namespace Math
 	/// </summary>
 	public class Matrix
 	{
+		public static Matrix Identity = new Matrix(1, 0, 0, 0,
+		                                           0, 1, 0, 0,
+		                                           0, 0, 1, 0,
+		                                           0, 0, 0, 1);
+		
 		double m11, m12, m13, m14;
 		double m21, m22, m23, m24;
 		double m31, m32, m33, m34;
@@ -28,6 +33,19 @@ namespace Math
 			this.m41 = m41; this.m42 = m42; this.m43 = m43; this.m44 = m44;
 		}
 		
+		/// <summary>
+		/// Return elemtents of the matrix in colum-major order
+		/// </summary>
+		public double[] Elements {
+			get {
+				return new double[] {
+					m11, m21, m31, m41,
+					m12, m22, m32, m42,
+					m13, m23, m33, m43,
+					m14, m24, m34, m44,
+				};
+			}
+		}
 		
 		/// <summary>
 		/// Creates a matrix from an array of elements in column-major order

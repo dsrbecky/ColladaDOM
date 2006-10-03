@@ -73,7 +73,7 @@ namespace Collada
 							Gl.glBindTexture(Gl.GL_TEXTURE_2D, texName);
 							textures[(string)image.Item] = texName;
 							
-							// Load imageS
+							// Load image
 							Il.ilBindImage(1);
 							Il.ilLoadImage(@"..\sample_data\" + (string)image.Item);
 							Ilu.iluFlipImage();

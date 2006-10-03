@@ -18,6 +18,10 @@ namespace Collada
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity();
 			
+			// Adjust scene
+			Gl.glLoadMatrixd(Viewer.MainForm.globalRotation.Elements);
+			Gl.glScaled(Viewer.MainForm.globalScale, Viewer.MainForm.globalScale, Viewer.MainForm.globalScale);
+			
 			// Setup camera
 			using(PerformanceLog log2 = new PerformanceLog("Setup camera")) {
 				List<InstanceWithExtra> cameras = new List<InstanceWithExtra>();
