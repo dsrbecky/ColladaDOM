@@ -31,7 +31,7 @@ namespace Collada
 				long count;
 				QueryPerformanceFrequency(out frequency);
 				QueryPerformanceCounter(out count);
-				return (count * TimeSpan.TicksPerSecond) / frequency;
+				return (count / frequency) * TimeSpan.TicksPerSecond + (count % frequency) * TimeSpan.TicksPerSecond / frequency;
 			}
 		}
 		
