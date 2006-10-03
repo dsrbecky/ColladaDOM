@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Collada
 {
@@ -70,12 +71,22 @@ namespace Collada
 			current = parent;
 		}
 		
+		public static PerformanceLog Begin(string description)
+		{
+			return new PerformanceLog(description);
+		}
+		
+		public static void End()
+		{
+			current.Stop();
+		}
+		
 		static string Format(int level, string description, TimeSpan time, TimeSpan parentTime)
 		{
 			double fraction = time.TotalMilliseconds / parentTime.TotalMilliseconds;
 			string markers = "#%*=>";
 			char marker = markers.ToCharArray()[level % markers.Length];
-			return String.Format("{0}{1,-14} - {2,-14} {3,-4} {4}\r\n",
+			return String.Format("{0}{1,-20} - {2,-14} {3,-4} {4}\r\n",
 			                     new String(' ', level * 2),
 			                     description,
 			                     time.TotalMilliseconds + " ms",
@@ -85,19 +96,24 @@ namespace Collada
 		
 		public override string ToString()
 		{
-			string text = Format(level, description, Duration, parent != null? parent.Duration: Duration);
+			StringBuilder stringBuilder = new StringBuilder();
+			ToString(stringBuilder);
+			return stringBuilder.ToString();
+		}
+		
+		void ToString(StringBuilder stringBuilder)
+		{
+			stringBuilder.Append(Format(level, description, Duration, parent != null? parent.Duration: Duration));
 			
 			TimeSpan otherTime = this.Duration;
 			foreach(PerformanceLog child in childs) {
-				text += child.ToString();
+				child.ToString(stringBuilder);
 				otherTime -= child.Duration;
 			}
 			
 			if (childs.Count > 0) {
-				text += Format(level + 1,"Other", otherTime, Duration);
+				stringBuilder.Append(Format(level + 1,"Other", otherTime, Duration));
 			}
-			
-			return text;
 		}
 	}
 }

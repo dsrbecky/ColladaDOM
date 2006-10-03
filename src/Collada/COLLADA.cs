@@ -27,8 +27,10 @@ namespace Collada
 		
 		public void Render()
 		{
-			if (this.LibraryAnimations != null) {
-				this.LibraryAnimations.Animate();
+			using(PerformanceLog log2 = new PerformanceLog("Animate")) {
+				if (this.LibraryAnimations != null) {
+					this.LibraryAnimations.Animate();
+				}
 			}
 			
 			string sceneID = this.Scene.InstanceVisualScene.Url.Remove(0,1);

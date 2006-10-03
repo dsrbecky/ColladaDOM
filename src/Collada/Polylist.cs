@@ -46,12 +46,16 @@ namespace Collada
 		
 		public void Render(InstanceGeometry instanceGeometry)
 		{
-			if (this.Material != null) {
-				instanceGeometry.UseMaterial(this.Material);
+			using(PerformanceLog log2 = new PerformanceLog("Switch material")) {
+				if (this.Material != null) {
+					instanceGeometry.UseMaterial(this.Material);
+				}
 			}
 			
 			if (displayList.HasValue) {
-				Gl.glCallList(displayList.Value);
+				using(PerformanceLog log2 = new PerformanceLog("Call display list")) {
+					Gl.glCallList(displayList.Value);
+				}
 				return;
 			}
 			

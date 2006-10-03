@@ -82,7 +82,9 @@ namespace Viewer
 		void Display()
 		{
 			using(PerformanceLog log = new PerformanceLog("Frame " + (framesRendered++))) {
-				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+				using(PerformanceLog log2 = new PerformanceLog("Clear")) {
+					Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+				}
 				
 				Gl.glMatrixMode(Gl.GL_MODELVIEW);
 				Gl.glLoadIdentity();
@@ -90,9 +92,13 @@ namespace Viewer
 	//			Gl.glRotated(angle * 0.7, 0, 1.0, 0);
 	//			Gl.glRotated(angle * 0.3, 0, 1.0, 0.2);
 				
-				collada.Render();
+				using(PerformanceLog log2 = new PerformanceLog("Render")) {
+					collada.Render();
+				}
 				
-				Glut.glutSwapBuffers();
+				using(PerformanceLog log2 = new PerformanceLog("Swap")) {
+					Glut.glutSwapBuffers();
+				}
 				
 				log.Stop();
 				Glut.glutSetWindowTitle(String.Format("Collada Viewer - {0:f1} FPS", 1 / log.Duration.TotalSeconds));
