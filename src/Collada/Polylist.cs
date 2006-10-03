@@ -42,10 +42,17 @@ namespace Collada
 			}
 		}
 		
+		int? displayList = null;
+		
 		public void Render(InstanceGeometry instanceGeometry)
 		{
 			if (this.Material != null) {
 				instanceGeometry.UseMaterial(this.Material);
+			}
+			
+			if (displayList.HasValue) {
+				Gl.glCallList(displayList.Value);
+				return;
 			}
 			
 			ulong  pStride = 0;
@@ -107,31 +114,36 @@ namespace Collada
 			}
 			
 			using(PerformanceLog log = new PerformanceLog("Render")) {
-				ulong pIndex = 0;
-				foreach(ulong vcount in vcounts) {
-					Gl.glBegin(Gl.GL_POLYGON);
-					{
-						for(ulong vertex = 0; vertex < vcount; vertex++) {
-							if (texcoords != null) {
-								ulong texCoordIndex = p[pIndex + texcoordOffset] * 2;
-								Gl.glTexCoord2f(texcoords[texCoordIndex],
-								                texcoords[texCoordIndex+1]);
+				displayList = Gl.glGenLists(1);
+				Gl.glNewList(displayList.Value, Gl.GL_COMPILE_AND_EXECUTE);
+				{
+					ulong pIndex = 0;
+					foreach(ulong vcount in vcounts) {
+						Gl.glBegin(Gl.GL_POLYGON);
+						{
+							for(ulong vertex = 0; vertex < vcount; vertex++) {
+								if (texcoords != null) {
+									ulong texCoordIndex = p[pIndex + texcoordOffset] * 2;
+									Gl.glTexCoord2f(texcoords[texCoordIndex],
+									                texcoords[texCoordIndex+1]);
+								}
+								if (normals != null) {
+									ulong nomIndex = p[pIndex + normalOffset] * 3;
+									Gl.glNormal3f(normals[nomIndex],
+									              normals[nomIndex+1],
+									              normals[nomIndex+2]);
+								}
+								ulong posIndex = p[pIndex + positionOffset] * 3;
+								Gl.glVertex3f(positions[posIndex],
+								              positions[posIndex+1],
+								              positions[posIndex+2]);
+								pIndex += pStride;
 							}
-							if (normals != null) {
-								ulong nomIndex = p[pIndex + normalOffset] * 3;
-								Gl.glNormal3f(normals[nomIndex],
-								              normals[nomIndex+1],
-								              normals[nomIndex+2]);
-							}
-							ulong posIndex = p[pIndex + positionOffset] * 3;
-							Gl.glVertex3f(positions[posIndex],
-							              positions[posIndex+1],
-							              positions[posIndex+2]);
-							pIndex += pStride;
 						}
+						Gl.glEnd();
 					}
-					Gl.glEnd();
 				}
+				Gl.glEndList();
 			}
 		}
 	}
