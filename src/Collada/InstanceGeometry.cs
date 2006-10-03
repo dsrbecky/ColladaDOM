@@ -26,6 +26,8 @@ namespace Collada
 			return null;
 		}
 		
+		public static Dictionary<string, int> textures = new Dictionary<string, int>();
+		
 		public void UseMaterial(string symbol)
 		{
 			Material material = Material.IDs[FindMaterial(symbol).Target.Remove(0,1)];
@@ -61,11 +63,23 @@ namespace Collada
 					
 					Gl.glEnable(Gl.GL_TEXTURE_2D);
 					
-					Il.ilBindImage(1);
-					Il.ilLoadImage(@"..\sample_data\" + (string)image.Item);
-					Ilu.iluFlipImage();
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, 1);
-					Ilut.ilutGLBuildMipmaps();
+					if (textures.ContainsKey((string)image.Item)) {
+						Gl.glBindTexture(Gl.GL_TEXTURE_2D, textures[(string)image.Item]);
+					} else {
+						using(PerformanceLog log2 = new PerformanceLog("Load texture")) {
+							// Make texture
+							int texName;
+							Gl.glGenTextures(1, out texName);
+							Gl.glBindTexture(Gl.GL_TEXTURE_2D, texName);
+							textures[(string)image.Item] = texName;
+							
+							// Load imageS
+							Il.ilBindImage(1);
+							Il.ilLoadImage(@"..\sample_data\" + (string)image.Item);
+							Ilu.iluFlipImage();
+							Ilut.ilutGLBuildMipmaps();
+						}
+					}
 				}
 				
 				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION , ((CommonColorOrTextureTypeColor)phong.Emission.Item).ValuesAsFloats);
