@@ -6,7 +6,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Viewer
+namespace Collada
 {
 	public static class HighPrecisionTimer
 	{

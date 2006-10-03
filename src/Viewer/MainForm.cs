@@ -93,6 +93,9 @@ namespace Viewer
 				collada.Render();
 				
 				Glut.glutSwapBuffers();
+				
+				log.Stop();
+				Glut.glutSetWindowTitle(String.Format("Collada Viewer - {0:f1} FPS", 1 / log.Duration.TotalSeconds));
 			}
 		}
 		

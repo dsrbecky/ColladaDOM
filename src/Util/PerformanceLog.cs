@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Viewer
+namespace Collada
 {
 	public class PerformanceLog: IDisposable
 	{
@@ -70,13 +70,33 @@ namespace Viewer
 			current = parent;
 		}
 		
+		static string Format(int level, string description, TimeSpan time, TimeSpan parentTime)
+		{
+			double fraction = time.TotalMilliseconds / parentTime.TotalMilliseconds;
+			string markers = "#%*=>";
+			char marker = markers.ToCharArray()[level % markers.Length];
+			return String.Format("{0}{1,-14} - {2,-14} {3,-4} {4}\r\n",
+			                     new String(' ', level * 2),
+			                     description,
+			                     time.TotalMilliseconds + " ms",
+			                     String.Format("{0:f0}%", fraction * 100),
+			                     new String(marker, (int)(fraction * 50)));
+		}
+		
 		public override string ToString()
 		{
-			string text = String.Empty;
-			text = new String(' ', level * 2) + description + " - " + Duration.TotalMilliseconds.ToString() + " ms\r\n";
+			string text = Format(level, description, Duration, parent != null? parent.Duration: Duration);
+			
+			TimeSpan otherTime = this.Duration;
 			foreach(PerformanceLog child in childs) {
 				text += child.ToString();
+				otherTime -= child.Duration;
 			}
+			
+			if (childs.Count > 0) {
+				text += Format(level + 1,"Other", otherTime, Duration);
+			}
+			
 			return text;
 		}
 	}
