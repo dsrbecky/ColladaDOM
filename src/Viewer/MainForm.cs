@@ -29,6 +29,7 @@ namespace Viewer
 		
 		public static double globalScale = 1.0;
 		public static Math.Matrix globalRotation = Math.Matrix.Identity;
+		public static double viewportAspectRatio = 1d;
 		
 		public static TimeSpan RunningTime {
 			get {
@@ -59,7 +60,7 @@ namespace Viewer
 			
 			Glut.glutInit();
 			Glut.glutInitDisplayMode(Glut.GLUT_DOUBLE | Glut.GLUT_RGB | Glut.GLUT_DEPTH);
-			Glut.glutInitWindowSize(500, 500);
+			Glut.glutInitWindowSize(600, 450);
 			Glut.glutInitWindowPosition(100, 100);
 			Glut.glutCreateWindow("Collada Viewer");
 			Init();
@@ -187,6 +188,8 @@ namespace Viewer
 			}
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity ();
+			
+			viewportAspectRatio = (double)h / (double)w;
 		}
 	}
 }

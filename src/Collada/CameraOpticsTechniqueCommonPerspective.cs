@@ -16,7 +16,6 @@ namespace Collada
 		public void GetCameraParameters(out double yFov, out double aspectRatio, out double zNear, out double zFar)
 		{
 			// Aspect ratio is defined as yfov / xfov
-			double viewportAspectRatio = 1d;
 			
 			// Load items
 			TargetableFloat itemAspectRatio = null;
@@ -36,7 +35,7 @@ namespace Collada
 			} else if (itemXfov != null && itemAspectRatio != null) {
 				yFov = itemXfov.Value * itemAspectRatio.Value;
 			} else if (itemXfov != null) {
-				yFov = itemXfov.Value * viewportAspectRatio;
+				yFov = itemXfov.Value * Viewer.MainForm.viewportAspectRatio;
 			} else {
 				yFov = 45d; // TODO: Waring: invalid collada document
 			}
@@ -47,7 +46,7 @@ namespace Collada
 			} else if (itemXfov != null && itemYfov != null) {
 				aspectRatio = itemYfov.Value / itemXfov.Value;
 			} else {
-				aspectRatio = viewportAspectRatio;
+				aspectRatio = Viewer.MainForm.viewportAspectRatio;
 			}
 			
 			// Get zNear and zFar

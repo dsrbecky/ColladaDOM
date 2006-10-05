@@ -23,6 +23,10 @@ namespace Collada
 			if (perspective != null) {
 				double yFov, aspectRatio, zNear, zFar;
 				perspective.GetCameraParameters(out yFov, out aspectRatio, out zNear, out zFar);
+				if (aspectRatio < Viewer.MainForm.viewportAspectRatio) {
+					yFov *= (Viewer.MainForm.viewportAspectRatio / aspectRatio);
+				}
+				aspectRatio = Viewer.MainForm.viewportAspectRatio;
 				Glu.gluPerspective(yFov, 1 / aspectRatio, zNear, zFar);
 			}
 			
