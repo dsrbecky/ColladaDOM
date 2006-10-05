@@ -70,7 +70,7 @@ namespace Collada
 									values[3] = interpolatedValue;
 									((Rotate)transform).Text = "";
 									foreach(double val in values) {
-										((Rotate)transform).Text += val.ToString() + " ";
+										((Rotate)transform).Text += val.ToString(System.Globalization.CultureInfo.InvariantCulture) + " ";
 									}
 								}
 							}

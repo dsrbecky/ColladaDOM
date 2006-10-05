@@ -24,7 +24,7 @@ namespace xsd2net
 			@"                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);" + "\r\n" +
 			@"                TValue[] values = new TValue[txts.Length];" + "\r\n" +
 			@"                for(int i = 0; i < txts.Length; i++) {" + "\r\n" +
-			@"                    values[i] = TValue.Parse(txts[i]);" + "\r\n" +
+			@"                    values[i] = TValue.Parse(txts[i]CULTURE);" + "\r\n" +
 			@"                }" + "\r\n" +
 			@"                return values;" + "\r\n";
 			
@@ -64,6 +64,11 @@ namespace xsd2net
 			code += codeEnd;
 			code = code.Replace("TValue", elementType);
 			code = code.Replace("NAME", functionName);
+			if (elementType == "System.Boolean" | elementType == "System.String") {
+				code = code.Replace("CULTURE", "");
+			} else {
+				code = code.Replace("CULTURE", ", System.Globalization.CultureInfo.InvariantCulture");
+			}
 			return code;
 		}
 	

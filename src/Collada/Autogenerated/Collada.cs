@@ -1,4 +1,4 @@
-namespace Collada {
+﻿namespace Collada {
     
     
     /// <summary>The COLLADA element declares the root of the document that comprises some of the content 
@@ -371,7 +371,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Double.Parse(txts[i]);
+                    values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -382,7 +382,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Single.Parse(txts[i]);
+                    values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -1501,7 +1501,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Double.Parse(txts[i]);
+                    values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -1512,7 +1512,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Single.Parse(txts[i]);
+                    values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -4566,7 +4566,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Double.Parse(txts[i]);
+                    values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -4577,7 +4577,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Single.Parse(txts[i]);
+                    values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -4694,7 +4694,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Int64[] values = new System.Int64[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Int64.Parse(txts[i]);
+                    values[i] = System.Int64.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10308,7 +10308,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Double.Parse(txts[i]);
+                    values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10319,7 +10319,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Single.Parse(txts[i]);
+                    values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10370,7 +10370,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Double.Parse(txts[i]);
+                    values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10381,7 +10381,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Single.Parse(txts[i]);
+                    values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10431,7 +10431,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Double.Parse(txts[i]);
+                    values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10442,7 +10442,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Single.Parse(txts[i]);
+                    values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10493,7 +10493,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Double.Parse(txts[i]);
+                    values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
@@ -10504,7 +10504,7 @@ namespace Collada {
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
-                    values[i] = System.Single.Parse(txts[i]);
+                    values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
                 return values;
             }
