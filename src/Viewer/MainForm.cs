@@ -5,6 +5,7 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -18,8 +19,6 @@ namespace Viewer
 {
 	public class MainForm
 	{
-		string filename = @"..\sample_data\seymourplane.dae";
-		
 		long framesRendered = 0;
 		
 		XmlSerializer serializer;
@@ -40,18 +39,32 @@ namespace Viewer
 		[STAThread]
 		public static void Main(string[] args)
 		{
-			new MainForm().Show();
+			string filename;
+			if (args.Length >= 1) {
+				filename = args[0];
+			} else {
+				OpenFileDialog dlg = new OpenFileDialog();
+				dlg.Filter = "Collada | *.dae";
+				if (dlg.ShowDialog() == DialogResult.OK) {
+					filename = dlg.FileName;
+				} else {
+					return;
+				}
+			}
+			new MainForm().Show(filename);
 		}
 		
 		~MainForm()
 		{
+			string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			string logFilename = Path.Combine(path, "PerformanceLog.txt");
 			PerformanceLog.Root.Stop();
-			StreamWriter file = new StreamWriter("PerformanceLog.txt");
+			StreamWriter file = new StreamWriter(logFilename);
 			file.Write(PerformanceLog.Root.ToString());
 			file.Close();
 		}
 		
-		public void Show()
+		public void Show(string filename)
 		{
 			serializer = new XmlSerializer(typeof(COLLADA));
 			using(FileStream file = new FileStream(filename, FileMode.Open)) {
@@ -176,7 +189,7 @@ namespace Viewer
 
 		void Reshape(int w, int h)
 		{
-			float size = 500f;
+			float size = 2000f;
 			
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
