@@ -14,6 +14,8 @@ using Tao.OpenGl;
 using Tao.DevIl;
 
 using Collada;
+using Collada.Math;
+using Collada.Util;
 
 namespace Viewer
 {
@@ -25,16 +27,6 @@ namespace Viewer
 		COLLADA collada;
 		
 		static DateTime startTime = DateTime.Now;
-		
-		public static double globalScale = 1.0;
-		public static Math.Matrix globalRotation = Math.Matrix.Identity;
-		public static double viewportAspectRatio = 1d;
-		
-		public static TimeSpan RunningTime {
-			get {
-				return DateTime.Now - startTime;
-			}
-		}
 		
 		[STAThread]
 		public static void Main(string[] args)
@@ -101,6 +93,7 @@ namespace Viewer
 		
 		void Display()
 		{
+			GlobalSettings.RunningTime = DateTime.Now - startTime;
 			using(PerformanceLog log = new PerformanceLog("Frame " + (framesRendered++))) {
 				using(PerformanceLog log2 = new PerformanceLog("Clear")) {
 					Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
@@ -155,7 +148,7 @@ namespace Viewer
 			// Save
 			double[] elements = new double[16];
 			Gl.glGetDoublev(Gl.GL_MODELVIEW_MATRIX, elements);
-			globalRotation = new Math.Matrix(elements);
+			GlobalSettings.GlobalRotation = new Collada.Math.Matrix(elements);
 			
 			lastX = x;
 			lastY = y;
@@ -181,9 +174,9 @@ namespace Viewer
 		void MouseWheel(int wheel, int direction, int x, int y)
 		{
 			if (direction > 0) {
-				globalScale /= 1.2;
+				GlobalSettings.GlobalScale /= 1.2;
 			} else {
-				globalScale *= 1.2;
+				GlobalSettings.GlobalScale *= 1.2;
 			}
 		}
 
@@ -202,7 +195,7 @@ namespace Viewer
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity ();
 			
-			viewportAspectRatio = (double)h / (double)w;
+			GlobalSettings.ViewportAspectRatio = (double)h / (double)w;
 		}
 	}
 }

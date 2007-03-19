@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 using Tao.OpenGl;
 
+using Collada.Util;
+
 namespace Collada
 {
 	public partial class VisualScene
@@ -19,8 +21,8 @@ namespace Collada
 			Gl.glLoadIdentity();
 			
 			// Adjust scene
-			Gl.glLoadMatrixd(Viewer.MainForm.globalRotation.Elements);
-			Gl.glScaled(Viewer.MainForm.globalScale, Viewer.MainForm.globalScale, Viewer.MainForm.globalScale);
+			Gl.glLoadMatrixd(GlobalSettings.GlobalRotation.Elements);
+			Gl.glScaled(GlobalSettings.GlobalScale, GlobalSettings.GlobalScale, GlobalSettings.GlobalScale);
 			
 			// Setup camera
 			using(PerformanceLog log2 = new PerformanceLog("Setup camera")) {

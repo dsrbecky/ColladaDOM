@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Math
+namespace Collada.Math
 {
 	/// <summary>
 	/// Represents 4x4 mathematical matrix. Immutable.

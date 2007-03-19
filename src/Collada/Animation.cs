@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 using Tao.OpenGl;
 
+using Collada.Util;
+
 namespace Collada
 {
 	public partial class Animation
@@ -35,7 +37,7 @@ namespace Collada
 						}
 					}
 					
-					float time = (float)Viewer.MainForm.RunningTime.TotalSeconds;
+					float time = (float)GlobalSettings.RunningTime.TotalSeconds;
 					time = time % input[input.Length - 1];
 					int index = -1;
 					for(int i = 0; i < input.Length - 1; i++) {

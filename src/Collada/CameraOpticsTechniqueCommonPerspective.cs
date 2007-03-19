@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 using Tao.OpenGl;
 
+using Collada.Util;
+
 namespace Collada
 {
 	public partial class CameraOpticsTechniqueCommonPerspective
@@ -35,7 +37,7 @@ namespace Collada
 			} else if (itemXfov != null && itemAspectRatio != null) {
 				yFov = itemXfov.Value * itemAspectRatio.Value;
 			} else if (itemXfov != null) {
-				yFov = itemXfov.Value * Viewer.MainForm.viewportAspectRatio;
+				yFov = itemXfov.Value * GlobalSettings.ViewportAspectRatio;
 			} else {
 				yFov = 45d; // TODO: Waring: invalid collada document
 			}
@@ -46,7 +48,7 @@ namespace Collada
 			} else if (itemXfov != null && itemYfov != null) {
 				aspectRatio = itemYfov.Value / itemXfov.Value;
 			} else {
-				aspectRatio = Viewer.MainForm.viewportAspectRatio;
+				aspectRatio = GlobalSettings.ViewportAspectRatio;
 			}
 			
 			// Get zNear and zFar

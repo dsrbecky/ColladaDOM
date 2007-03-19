@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 using Tao.OpenGl;
 
+using Collada.Util;
+
 namespace Collada
 {
 	public partial class Light

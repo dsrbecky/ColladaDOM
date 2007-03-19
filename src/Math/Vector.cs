@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Math
+namespace Collada.Math
 {
 	/// <summary>
 	/// 4 element mathematical vector.

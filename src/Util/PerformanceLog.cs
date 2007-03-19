@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Collada
+namespace Collada.Util
 {
 	public class PerformanceLog: IDisposable
 	{

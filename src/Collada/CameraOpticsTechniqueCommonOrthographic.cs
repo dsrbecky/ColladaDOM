@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 using Tao.OpenGl;
 
+using Collada.Util;
+
 namespace Collada
 {
 	public partial class CameraOpticsTechniqueCommonOrthographic
@@ -35,7 +37,7 @@ namespace Collada
 			} else if (itemYmag != null && itemAspectRatio != null) {
 				xMag = itemYmag.Value / itemAspectRatio.Value;
 			} else if (itemYmag != null) {
-				xMag = itemYmag.Value / Viewer.MainForm.viewportAspectRatio;
+				xMag = itemYmag.Value / GlobalSettings.ViewportAspectRatio;
 			} else {
 				xMag = 1.0; // TODO: Waring: invalid collada document
 			}
@@ -46,7 +48,7 @@ namespace Collada
 			} else if (itemXmag != null && itemAspectRatio != null) {
 				yMag = itemXmag.Value * itemAspectRatio.Value;
 			} else if (itemXmag != null) {
-				yMag = itemXmag.Value * Viewer.MainForm.viewportAspectRatio;
+				yMag = itemXmag.Value * GlobalSettings.ViewportAspectRatio;
 			} else {
 				yMag = 1.0; // TODO: Waring: invalid collada document
 			}

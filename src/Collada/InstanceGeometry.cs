@@ -10,6 +10,8 @@ using System.Xml.Serialization;
 using Tao.OpenGl;
 using Tao.DevIl;
 
+using Collada.Util;
+
 namespace Collada
 {
 	public partial class InstanceGeometry
@@ -68,10 +70,10 @@ namespace Collada
 					} else {
 						using(PerformanceLog log2 = new PerformanceLog("Load texture")) {
 							// Make texture
-							int texName;
-							Gl.glGenTextures(1, out texName);
-							Gl.glBindTexture(Gl.GL_TEXTURE_2D, texName);
-							textures[(string)image.Item] = texName;
+							int[] texNames = new int[1];
+							Gl.glGenTextures(texNames.Length, texNames);
+							Gl.glBindTexture(Gl.GL_TEXTURE_2D, texNames[0]);
+							textures[(string)image.Item] = texNames[0];
 							
 							// Load image
 							Il.ilBindImage(1);
