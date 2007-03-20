@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xsd2net", "tools\xsd2net\xs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer", "src\Viewer.csproj", "{2A038458-5506-4E2F-B02F-DB6C0FFE4946}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collada", "lib\Collada\Collada.csproj", "{B80E7FD1-E980-4304-99AC-E9B76E888FD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{2A038458-5506-4E2F-B02F-DB6C0FFE4946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A038458-5506-4E2F-B02F-DB6C0FFE4946}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A038458-5506-4E2F-B02F-DB6C0FFE4946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B80E7FD1-E980-4304-99AC-E9B76E888FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B80E7FD1-E980-4304-99AC-E9B76E888FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B80E7FD1-E980-4304-99AC-E9B76E888FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B80E7FD1-E980-4304-99AC-E9B76E888FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1CBA25BB-CC25-4A71-8FCF-F9FE540D583D} = {602A7594-515D-4D6E-8269-8CE4DFCE51C2}
