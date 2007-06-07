@@ -17,22 +17,22 @@ namespace Collada
 	{
 		bool wasLoaded;
 		
-		protected ulong   pStride;
+		protected int     pStride;
 		
-		protected ulong   positionOffset;
+		protected int     positionOffset;
 		protected Source  positionSource;
 		protected float[] positions;
 		
-		protected ulong   normalOffset;
+		protected int     normalOffset;
 		protected Source  normalSource;
 		protected float[] normals;
 		
-		protected ulong   texcoordOffset;
+		protected int     texcoordOffset;
 		protected Source  texcoordSource;
 		protected float[] texcoords;
 		
-		protected ulong[]   vcounts;
-		protected ulong[][] ps;
+		protected int[]   vcounts;
+		protected int[][] ps;
 		
 		protected int? displayList;
 		
@@ -50,34 +50,34 @@ namespace Collada
 		protected void LoadData()
 		{
 			foreach(InputLocalOffset input in GetInputs()) {
-				pStride = System.Math.Max(pStride, input.Offset + 1);
+				pStride = System.Math.Max(pStride, (int)input.Offset + 1);
 				if (input.Semantic == "VERTEX") {
 					Vertices vertices = Vertices.IDs[input.Source.Remove(0,1)];
 					foreach(InputLocal vertexInput in vertices.Input) {
 						if (vertexInput.Semantic == "POSITION") {
-							positionOffset = input.Offset;
+							positionOffset = (int)input.Offset;
 							positionSource = Source.IDs[vertexInput.Source.Remove(0,1)];
 						}
 						if (vertexInput.Semantic == "NORMAL") {
-							normalOffset = input.Offset;
+							normalOffset = (int)input.Offset;
 							normalSource = Source.IDs[vertexInput.Source.Remove(0,1)];
 						}
 						if (vertexInput.Semantic == "TEXCOORD") {
-							texcoordOffset = input.Offset;
+							texcoordOffset = (int)input.Offset;
 							texcoordSource = Source.IDs[vertexInput.Source.Remove(0,1)];
 						}
 					}
 				}
 				if (input.Semantic == "POSITION") {
-					positionOffset = input.Offset;
+					positionOffset = (int)input.Offset;
 					positionSource = Source.IDs[input.Source.Remove(0,1)];
 				}
 				if (input.Semantic == "NORMAL") {
-					normalOffset = input.Offset;
+					normalOffset = (int)input.Offset;
 					normalSource = Source.IDs[input.Source.Remove(0,1)];
 				}
 				if (input.Semantic == "TEXCOORD") {
-					texcoordOffset = input.Offset;
+					texcoordOffset = (int)input.Offset;
 					texcoordSource = Source.IDs[input.Source.Remove(0,1)];
 				}
 			}
@@ -95,7 +95,7 @@ namespace Collada
 				vcounts = Utils.ParseIntArray(GetVcount());
 			}
 			List<string> psList = GetPs();
-			ps = new ulong[psList.Count][];
+			ps = new int[psList.Count][];
 			for(int i = 0; i < ps.Length; i++) {
 				ps[i] = Utils.ParseIntArray(psList[i]);
 			}
@@ -135,24 +135,35 @@ namespace Collada
 			}
 		}
 		
-		protected void GlTexCoord(ulong sourceIndex)
+		protected void GlTexCoord(int sourceIndex)
 		{
 			Gl.glTexCoord2f(texcoords[sourceIndex * 2],
 			                texcoords[sourceIndex * 2 + 1]);
 		}
 		
-		protected void GlNormal(ulong sourceIndex)
+		protected void GlNormal(int sourceIndex)
 		{
 			Gl.glNormal3f(normals[sourceIndex * 3],
 			              normals[sourceIndex * 3 + 1],
 			              normals[sourceIndex * 3 + 2]);
 		}
 		
-		protected void GlVertex(ulong sourceIndex)
+		protected void GlVertex(int sourceIndex)
 		{
 			Gl.glVertex3f(positions[sourceIndex * 3],
 			              positions[sourceIndex * 3 + 1],
 			              positions[sourceIndex * 3 + 2]);
+		}
+		
+		protected void EmitP(int[] pArray, int pBaseIndex)
+		{
+			if (texcoords != null) {
+				GlTexCoord(pArray[pBaseIndex + texcoordOffset]);
+			}
+			if (normals != null) {
+				GlNormal(pArray[pBaseIndex + normalOffset]);
+			}
+			GlVertex(pArray[pBaseIndex + positionOffset]);
 		}
 	}
 }

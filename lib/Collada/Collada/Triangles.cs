@@ -13,7 +13,7 @@ using Collada.Util;
 
 namespace Collada
 {
-	public partial class Polylist: Primitives
+	public partial class Triangles: Primitives
 	{
 		protected override string GetMaterial()
 		{
@@ -25,11 +25,6 @@ namespace Collada
 			return this.Input;
 		}
 		
-		protected override string GetVcount()
-		{
-			return this.Vcount;
-		}
-		
 		protected override List<string> GetPs()
 		{
 			return new List<string>(new string[] {this.P});
@@ -37,17 +32,13 @@ namespace Collada
 		
 		protected override void MakeDisplayList()
 		{
-			int pIndex = 0;
-			foreach(int vcount in vcounts) {
-				Gl.glBegin(Gl.GL_POLYGON);
-				{
-					for(int vertex = 0; vertex < vcount; vertex++) {
-						EmitP(ps[0], pIndex);
-						pIndex += pStride;
-					}
+			Gl.glBegin(Gl.GL_TRIANGLES);
+			{
+				for(int pIndex = 0; pIndex < ps[0].Length; pIndex += pStride) {
+					EmitP(ps[0], pIndex);
 				}
-				Gl.glEnd();
 			}
+			Gl.glEnd();
 		}
 	}
 }

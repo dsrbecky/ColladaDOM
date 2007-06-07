@@ -61,6 +61,8 @@
     <Compile Include="Collada\Node.cs" />
     <Compile Include="Collada\Polylist.cs" />
     <Compile Include="Collada\Primitives.cs" />
+    <Compile Include="Collada\Triangles.cs" />
+    <Compile Include="Collada\Tristrips.cs" />
     <Compile Include="Collada\VisualScene.cs" />
     <Compile Include="Math\Matrix.cs" />
     <Compile Include="Math\Vector.cs" />

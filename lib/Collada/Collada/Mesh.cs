@@ -18,8 +18,8 @@ namespace Collada
 		public void Render(InstanceGeometry instanceGeometry)
 		{
 			foreach(object item in this.Items) {
-				if (item is Polylist) {
-					((Polylist)item).Render(instanceGeometry);
+				if (item is Primitives) {
+					((Primitives)item).Render(instanceGeometry);
 				}
 			}
 		}

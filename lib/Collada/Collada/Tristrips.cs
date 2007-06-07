@@ -13,7 +13,7 @@ using Collada.Util;
 
 namespace Collada
 {
-	public partial class Polylist: Primitives
+	public partial class Tristrips: Primitives
 	{
 		protected override string GetMaterial()
 		{
@@ -25,25 +25,18 @@ namespace Collada
 			return this.Input;
 		}
 		
-		protected override string GetVcount()
-		{
-			return this.Vcount;
-		}
-		
 		protected override List<string> GetPs()
 		{
-			return new List<string>(new string[] {this.P});
+			return this.P;
 		}
 		
 		protected override void MakeDisplayList()
 		{
-			int pIndex = 0;
-			foreach(int vcount in vcounts) {
-				Gl.glBegin(Gl.GL_POLYGON);
+			foreach(int[] pArray in ps) {
+				Gl.glBegin(Gl.GL_TRIANGLE_STRIP);
 				{
-					for(int vertex = 0; vertex < vcount; vertex++) {
-						EmitP(ps[0], pIndex);
-						pIndex += pStride;
+					for(int pIndex = 0; pIndex < pArray.Length; pIndex += pStride) {
+						EmitP(pArray, pIndex);
 					}
 				}
 				Gl.glEnd();

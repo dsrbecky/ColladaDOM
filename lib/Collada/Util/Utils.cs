@@ -11,12 +11,12 @@ namespace Collada.Util
 {
 	public static class Utils
 	{
-		public static ulong[] ParseIntArray(string text)
+		public static int[] ParseIntArray(string text)
 		{
 			string[] txts = text.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries);
-			ulong[] ret = new ulong[txts.Length];
+			int[] ret = new int[txts.Length];
 			for(int i = 0; i < txts.Length; i++) {
-				ret[i] = ulong.Parse(txts[i]);
+				ret[i] = int.Parse(txts[i]);
 			}
 			return ret;
 		}
