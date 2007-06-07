@@ -5970,7 +5970,7 @@
                      The <b>wglUseFontBitmaps</b> function defines <i>count</i> display lists in
                      the current OpenGL rendering context.  Each display list has an identifying
                      number, starting at <i>listBase</i>.  Each display list consists of a single
-                     call to <see cref="M:Tao.OpenGl.Gl.glBitmap(System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Object)"/>.  The definition of bitmap
+                     call to <see cref="!:Tao.OpenGl.Gl.glBitmap(int, int, float, float, float, float, object)"/>.  The definition of bitmap
                      <i>listBase + i</i> is taken from the glyph <i>first + i</i> of the font
                      currently selected in the device context specified by <i>deviceContext</i>.
                      If a glyph is not defined, then the function defines an empty display list
@@ -5990,7 +5990,7 @@
                  </para>
                  <para>
                      The function determines the parameters of each call to
-                     <see cref="M:Tao.OpenGl.Gl.glBitmap(System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Object)"/> as follows:
+                     <see cref="!:Tao.OpenGl.Gl.glBitmap(int, int, float, float, float, float, object)"/> as follows:
                  </para>
                  <para>
                      <list type="table">
@@ -6090,7 +6090,7 @@
                  </para>
              </remarks>
              /* seealso cref="Gdi.GetGlyphOutline" /&gt;*/
-             <seealso cref="M:Tao.OpenGl.Gl.glBitmap(System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Object)"/>
+             <seealso cref="!:Tao.OpenGl.Gl.glBitmap(int, int, float, float, float, float, object)"/>
              <seealso cref="M:Tao.OpenGl.Gl.glCallLists(System.Int32,System.Int32,System.Object)"/>
              <seealso cref="M:Tao.OpenGl.Gl.glListBase(System.Int32)"/>
              /* seealso cref="Gdi.GLYPHMETRICS" /&gt;*/

@@ -4559,6 +4559,29 @@
                 Returns a pointer to a string.
             </returns>
         </member>
+        <member name="M:Tao.OpenAl.Alc.alcGetStringv(System.IntPtr,System.Int32)">
+            <summary>
+                Returns strings related to the context.
+            </summary>
+            <param name="device">
+                The device to be queried.
+            </param>
+            <param name="attribute">
+                <para>
+                    An attribute to be retrieved:
+                </para>
+                <para>
+                    <list type="bullet">
+                        <item><see cref="F:Tao.OpenAl.Alc.ALC_DEFAULT_DEVICE_SPECIFIER"/></item>
+                        <item><see cref="F:Tao.OpenAl.Alc.ALC_DEVICE_SPECIFIER"/></item>
+                        <item><see cref="F:Tao.OpenAl.Alc.ALC_EXTENSIONS"/></item>
+                    </list>
+                </para>
+            </param>
+            <returns>
+                Returns a pointer to a string.
+            </returns>
+        </member>
         <member name="M:Tao.OpenAl.Alc.alcIsExtensionPresent(System.IntPtr,System.String)">
             <summary>
                 Queries if a specified context extension is available.
