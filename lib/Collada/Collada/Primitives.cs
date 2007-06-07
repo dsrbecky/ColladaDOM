@@ -134,7 +134,7 @@ namespace Collada
 			
 			using(PerformanceLog log = new PerformanceLog("Switch material")) {
 				if (this.GetMaterial() != null) {
-					instanceGeometry.UseMaterial(this.GetMaterial());
+					instanceGeometry.GetMaterial(this.GetMaterial()).Use();
 				}
 			}
 			

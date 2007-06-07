@@ -54,6 +54,7 @@
     <Compile Include="Collada\Geometry.cs" />
     <Compile Include="Collada\GlobalSettings.cs" />
     <Compile Include="Collada\InstanceGeometry.cs" />
+    <Compile Include="Collada\InstanceMaterial.cs" />
     <Compile Include="Collada\InstanceWithExtra.cs" />
     <Compile Include="Collada\LibraryAnimations.cs" />
     <Compile Include="Collada\Light.cs" />
