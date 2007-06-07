@@ -60,10 +60,12 @@
     <Compile Include="Collada\Mesh.cs" />
     <Compile Include="Collada\Node.cs" />
     <Compile Include="Collada\Polylist.cs" />
+    <Compile Include="Collada\Primitives.cs" />
     <Compile Include="Collada\VisualScene.cs" />
     <Compile Include="Math\Matrix.cs" />
     <Compile Include="Math\Vector.cs" />
     <Compile Include="Util\HighPrecisionTimer.cs" />
     <Compile Include="Util\PerformanceLog.cs" />
+    <Compile Include="Util\Utils.cs" />
   </ItemGroup>
 </Project>
