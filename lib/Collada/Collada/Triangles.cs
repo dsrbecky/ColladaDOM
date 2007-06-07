@@ -16,12 +16,12 @@ namespace Collada
 {
 	public partial class Triangles: Primitives
 	{
-		protected override string GetMaterial()
+		public override string GetMaterial()
 		{
 			return this.Material;
 		}
 		
-		protected override List<InputLocalOffset> GetInputs()
+		public override List<InputLocalOffset> GetInputs()
 		{
 			return this.Input;
 		}

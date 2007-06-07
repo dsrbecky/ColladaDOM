@@ -50,9 +50,9 @@ namespace Collada
 			get { return triangleCount; }
 		}
 		
-		protected abstract string GetMaterial();
+		public abstract string GetMaterial();
 		
-		protected abstract List<InputLocalOffset> GetInputs();
+		public abstract List<InputLocalOffset> GetInputs();
 		
 		protected virtual string GetVcount()
 		{
