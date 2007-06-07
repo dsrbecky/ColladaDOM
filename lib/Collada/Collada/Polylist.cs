@@ -47,6 +47,8 @@ namespace Collada
 					}
 				}
 				Gl.glEnd();
+				vertexCount   += vcount;
+				triangleCount += vcount - 2;
 			}
 		}
 	}

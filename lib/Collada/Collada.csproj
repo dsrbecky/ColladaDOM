@@ -65,6 +65,7 @@
     <Compile Include="Collada\Tristrips.cs" />
     <Compile Include="Collada\VisualScene.cs" />
     <Compile Include="Math\Matrix.cs" />
+    <Compile Include="Math\Triangle.cs" />
     <Compile Include="Math\Vector.cs" />
     <Compile Include="Util\HighPrecisionTimer.cs" />
     <Compile Include="Util\PerformanceLog.cs" />

@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using Tao.OpenGl;
 
 using Collada.Util;
+using Collada.Math;
 
 namespace Collada
 {
@@ -36,16 +37,34 @@ namespace Collada
 		
 		protected int? displayList;
 		
+		protected int vertexCount;
+		protected int triangleCount;
+		
+		[XmlIgnore]
+		public int VertexCount {
+			get { return vertexCount; }
+		}
+		
+		[XmlIgnore]
+		public int TriangleCount {
+			get { return triangleCount; }
+		}
+		
 		protected abstract string GetMaterial();
 		
 		protected abstract List<InputLocalOffset> GetInputs();
 		
-		protected virtual  string GetVcount()
+		protected virtual string GetVcount()
 		{
 			return null;
 		}
 		
 		protected abstract List<string> GetPs();
+		
+		public virtual List<Triangle> GetTriangles()
+		{
+			return new List<Triangle>();
+		}
 		
 		protected void LoadData()
 		{
