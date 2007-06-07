@@ -16,8 +16,6 @@ namespace Collada
 {
 	public partial class InstanceMaterial
 	{
-		public static Dictionary<string, int> textures = new Dictionary<string, int>();
-		
 		public void Use()
 		{
 			Material material = Material.IDs[this.Target.Remove(0,1)];
@@ -52,25 +50,8 @@ namespace Collada
 					}
 					Image image = Image.IDs[surface.InitFrom[0].Value];
 					
-					Gl.glEnable(Gl.GL_TEXTURE_2D);
-					
-					if (textures.ContainsKey((string)image.Item)) {
-						Gl.glBindTexture(Gl.GL_TEXTURE_2D, textures[(string)image.Item]);
-					} else {
-						using(PerformanceLog log2 = new PerformanceLog("Load texture")) {
-							// Make texture
-							int[] texNames = new int[1];
-							Gl.glGenTextures(texNames.Length, texNames);
-							Gl.glBindTexture(Gl.GL_TEXTURE_2D, texNames[0]);
-							textures[(string)image.Item] = texNames[0];
-							
-							// Load image
-							Il.ilBindImage(1);
-							Il.ilLoadImage(@"..\sample_data\" + (string)image.Item);
-							Ilu.iluFlipImage();
-							Ilut.ilutGLBuildMipmaps();
-						}
-					}
+					Texture tex = Texture.Load(@"..\sample_data\" + (string)image.Item);
+					tex.Bind();
 				}
 				
 				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION , ((CommonColorOrTextureTypeColor)phong.Emission.Item).ValuesAsFloats);
