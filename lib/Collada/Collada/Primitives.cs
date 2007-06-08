@@ -66,8 +66,10 @@ namespace Collada
 			return new List<Triangle>();
 		}
 		
-		protected void LoadData()
+		public void LoadData()
 		{
+			if (wasLoaded) return;
+			
 			foreach(InputLocalOffset input in GetInputs()) {
 				pStride = System.Math.Max(pStride, (int)input.Offset + 1);
 				if (input.Semantic == "VERTEX") {
@@ -122,6 +124,18 @@ namespace Collada
 			wasLoaded = true;
 		}
 		
+		public void LoadDisplayList()
+		{
+			if (displayList.HasValue) return;
+			
+			displayList = Gl.glGenLists(1);
+			Gl.glNewList(displayList.Value, Gl.GL_COMPILE);
+			{
+				MakeDisplayList();
+			}
+			Gl.glEndList();
+		}
+		
 		protected abstract void MakeDisplayList();
 		
 		public void Render(InstanceGeometry instanceGeometry)
@@ -140,12 +154,7 @@ namespace Collada
 			
 			if (!displayList.HasValue) {
 				using(new PerformanceLog("Make display list: " + instanceGeometry.Url, LogType.Loading)) {
-					displayList = Gl.glGenLists(1);
-					Gl.glNewList(displayList.Value, Gl.GL_COMPILE);
-					{
-						MakeDisplayList();
-					}
-					Gl.glEndList();
+					LoadDisplayList();
 				}
 			}
 			
