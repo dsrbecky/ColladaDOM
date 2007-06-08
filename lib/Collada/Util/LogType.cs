@@ -10,6 +10,7 @@ namespace Collada.Util
 	public enum LogType
 	{
 		Default,
-		Loading
+		Loading,
+		Verbose
 	}
 }

@@ -127,19 +127,19 @@ namespace Collada
 		public void Render(InstanceGeometry instanceGeometry)
 		{
 			if (!wasLoaded) {
-				using(new PerformanceLog("Load data for " + instanceGeometry.Url, LogType.Loading)) {
+				using(new PerformanceLog("Load data: " + instanceGeometry.Url, LogType.Loading)) {
 					LoadData();
 				}
 			}
 			
-			using(new PerformanceLog("Switch material")) {
-				if (this.GetMaterial() != null) {
+			if (this.GetMaterial() != null) {
+				using(new PerformanceLog("Switch material: " + this.GetMaterial(), LogType.Verbose)) {
 					instanceGeometry.GetMaterial(this.GetMaterial()).Use();
 				}
 			}
 			
 			if (!displayList.HasValue) {
-				using(new PerformanceLog("Make display list for " + instanceGeometry.Url, LogType.Loading)) {
+				using(new PerformanceLog("Make display list: " + instanceGeometry.Url, LogType.Loading)) {
 					displayList = Gl.glGenLists(1);
 					Gl.glNewList(displayList.Value, Gl.GL_COMPILE);
 					{
@@ -149,7 +149,7 @@ namespace Collada
 				}
 			}
 			
-			using(new PerformanceLog("Call display list")) {
+			using(new PerformanceLog("Call display list: " + instanceGeometry.Url, LogType.Verbose)) {
 				Gl.glCallList(displayList.Value);
 			}
 		}

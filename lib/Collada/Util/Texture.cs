@@ -34,7 +34,7 @@ namespace Collada.Util
 			if (textureCache.ContainsKey(name)) {
 				return textureCache[name];
 			} else {
-				using(new PerformanceLog("Load texture " + name, LogType.Loading)) {
+				using(new PerformanceLog("Load texture: " + name, LogType.Loading)) {
 					// Make texture
 					int[] texNames = new int[1];
 					Gl.glGenTextures(texNames.Length, texNames);

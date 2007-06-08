@@ -21,7 +21,7 @@ namespace Collada
 		static XmlSerializer Serializer {
 			get {
 				if (serializer == null) {
-					using(new PerformanceLog("Creating serializer", LogType.Loading)) {
+					using(new PerformanceLog("Load serializer", LogType.Loading)) {
 						serializer = new XmlSerializer(typeof(COLLADA));
 					}
 				}
@@ -31,7 +31,7 @@ namespace Collada
 		
 		public static COLLADA Load(string filename)
 		{
-			using(new PerformanceLog("Loading xml file " + filename, LogType.Loading)) {
+			using(new PerformanceLog("Load xml file: " + filename, LogType.Loading)) {
 				FileStream file = new FileStream(filename, FileMode.Open);
 				COLLADA colladaDocument = (COLLADA)Serializer.Deserialize(file);
 				file.Close();

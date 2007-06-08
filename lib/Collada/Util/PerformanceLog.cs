@@ -16,6 +16,9 @@ namespace Collada.Util
 		public static readonly PerformanceLog Root;
 		static PerformanceLog current;
 		
+		const int textFieldSize = 50;
+		static bool IsVerbose = false;
+		
 		string description;
 		LogType logType;
 		int level;
@@ -68,8 +71,10 @@ namespace Collada.Util
 			this.parent = current;
 			current = this;
 			if (parent != null) {
-				parent.childs.Add(this);
 				this.level = parent.level + 1;
+				if (IsVerbose || logType != LogType.Verbose) {
+					parent.childs.Add(this);
+				}
 			} else {
 				this.level = 0;
 			}
@@ -84,8 +89,16 @@ namespace Collada.Util
 		{
 			endTime = HighPrecisionTimer.Now;
 			current = parent;
+			PrintOnConsole();
+		}
+		
+		void PrintOnConsole()
+		{
 			if (this.LogType == LogType.Loading) {
-				string msg = String.Format("PerfLog: {0} ({1:f1} ms)", description, this.Duration.TotalMilliseconds);
+				string msg = String.Format("PerfLog: {0}{1} ({2:f1} ms)",
+				                           new String(' ', System.Math.Max(level * 2 - 2, 0)),
+				                           description,
+				                           this.Duration.TotalMilliseconds);
 				System.Console.WriteLine(msg);
 				System.Diagnostics.Debug.WriteLine(msg);
 			}
@@ -106,9 +119,9 @@ namespace Collada.Util
 			double fraction = time.TotalMilliseconds / parentTime.TotalMilliseconds;
 			string markers = "#%*=>";
 			char marker = markers.ToCharArray()[level % markers.Length];
-			return String.Format("{0}{1,-20} - {2,-14} {3,-4} {4}\r\n",
+			return String.Format("{0}{1} - {2,-14} {3,-4} {4}\r\n",
 			                     new String(' ', level * 2),
-			                     description,
+			                     description.PadRight(textFieldSize).Substring(0, textFieldSize),
 			                     time.TotalMilliseconds + " ms",
 			                     String.Format("{0:f0}%", fraction * 100),
 			                     new String(marker, (int)(fraction * 50)));

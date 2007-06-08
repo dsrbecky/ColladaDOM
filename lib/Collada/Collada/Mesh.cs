@@ -17,9 +17,11 @@ namespace Collada
 	{
 		public void Render(InstanceGeometry instanceGeometry)
 		{
-			foreach(object item in this.Items) {
-				if (item is Primitives) {
-					((Primitives)item).Render(instanceGeometry);
+			using(new PerformanceLog("Render geometry: " + instanceGeometry.Url)) {
+				foreach(object item in this.Items) {
+					if (item is Primitives) {
+						((Primitives)item).Render(instanceGeometry);
+					}
 				}
 			}
 		}
