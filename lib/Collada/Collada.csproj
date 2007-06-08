@@ -71,20 +71,11 @@
     <Compile Include="Util\Texture.cs" />
     <Compile Include="Util\Utils.cs" />
   </ItemGroup>
-  <Target Name="GenerateSerializationAssembliesForAllTypes"
-          DependsOnTargets="AssignTargetPaths;Compile;ResolveKeySource"
-          Inputs="$(MSBuildAllProjects);@(IntermediateAssembly)"
-          Outputs="$(OutputPath)$(_SGenDllName)">
-    <SGen BuildAssemblyName="$(TargetFileName)"
-          BuildAssemblyPath="$(OutputPath)" References="@(ReferencePath)"
-          ShouldGenerateSerializer="true" UseProxyTypes="false"
-          KeyContainer="$(KeyContainerName)" KeyFile="$(KeyOriginatorFile)"
-          DelaySign="$(DelaySign)" ToolPath="$(SGenToolPath)">
-      <Output TaskParameter="SerializationAssembly"
-              ItemName="SerializationAssembly" />
+  <Target Name="GenerateSerializationAssembliesForAllTypes" DependsOnTargets="AssignTargetPaths;Compile;ResolveKeySource" Inputs="$(MSBuildAllProjects);@(IntermediateAssembly)" Outputs="$(OutputPath)$(_SGenDllName)">
+    <SGen BuildAssemblyName="$(TargetFileName)" BuildAssemblyPath="$(OutputPath)" References="@(ReferencePath)" ShouldGenerateSerializer="true" UseProxyTypes="false" KeyContainer="$(KeyContainerName)" KeyFile="$(KeyOriginatorFile)" DelaySign="$(DelaySign)" ToolPath="$(SGenToolPath)">
+      <Output TaskParameter="SerializationAssembly" ItemName="SerializationAssembly" />
     </SGen>
   </Target>
-  <Target Name="AfterBuild"
-    DependsOnTargets="GenerateSerializationAssembliesForAllTypes">
+  <Target Name="AfterBuild" DependsOnTargets="GenerateSerializationAssembliesForAllTypes">
   </Target>
 </Project>

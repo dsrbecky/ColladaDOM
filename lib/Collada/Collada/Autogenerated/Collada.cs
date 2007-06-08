@@ -1,4 +1,4 @@
-﻿namespace Collada {
+namespace Collada {
     
     
     /// <summary>The COLLADA element declares the root of the document that comprises some of the content 
@@ -365,26 +365,36 @@
         
         private string textField;
         
+        System.Double[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Double[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
+        System.Single[] cacheOfValuesAsFloats;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Single[] ValuesAsFloats {
             get {
+                if (cacheOfValuesAsFloats != null) return cacheOfValuesAsFloats;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValuesAsFloats = values;
+                return cacheOfValuesAsFloats;
             }
         }
         
@@ -1495,26 +1505,36 @@
         
         private string textField;
         
+        System.Double[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Double[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
+        System.Single[] cacheOfValuesAsFloats;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Single[] ValuesAsFloats {
             get {
+                if (cacheOfValuesAsFloats != null) return cacheOfValuesAsFloats;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValuesAsFloats = values;
+                return cacheOfValuesAsFloats;
             }
         }
         
@@ -4401,10 +4421,15 @@
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, NameArray> IDs = new System.Collections.Generic.Dictionary<string, NameArray>();
+        System.String[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.String[] Values {
             get {
-                return this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                if (cacheOfValues != null) return cacheOfValues;
+                
+                cacheOfValues = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
+                return cacheOfValues;
             }
         }
         
@@ -4476,15 +4501,20 @@
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, BoolArray> IDs = new System.Collections.Generic.Dictionary<string, BoolArray>();
+        System.Boolean[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Boolean[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Boolean[] values = new System.Boolean[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Boolean.Parse(txts[i]);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
         
@@ -4560,26 +4590,36 @@
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, FloatArray> IDs = new System.Collections.Generic.Dictionary<string, FloatArray>();
+        System.Double[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Double[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
+        System.Single[] cacheOfValuesAsFloats;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Single[] ValuesAsFloats {
             get {
+                if (cacheOfValuesAsFloats != null) return cacheOfValuesAsFloats;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValuesAsFloats = values;
+                return cacheOfValuesAsFloats;
             }
         }
         
@@ -4688,15 +4728,20 @@
         private string textField;
         
         public static System.Collections.Generic.Dictionary<string, IntArray> IDs = new System.Collections.Generic.Dictionary<string, IntArray>();
+        System.Int64[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Int64[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Int64[] values = new System.Int64[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Int64.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
         
@@ -10302,26 +10347,36 @@
         
         private string textField;
         
+        System.Double[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Double[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
+        System.Single[] cacheOfValuesAsFloats;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Single[] ValuesAsFloats {
             get {
+                if (cacheOfValuesAsFloats != null) return cacheOfValuesAsFloats;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValuesAsFloats = values;
+                return cacheOfValuesAsFloats;
             }
         }
         
@@ -10364,26 +10419,36 @@
         
         private string textField;
         
+        System.Double[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Double[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
+        System.Single[] cacheOfValuesAsFloats;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Single[] ValuesAsFloats {
             get {
+                if (cacheOfValuesAsFloats != null) return cacheOfValuesAsFloats;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValuesAsFloats = values;
+                return cacheOfValuesAsFloats;
             }
         }
         
@@ -10425,26 +10490,36 @@
         
         private string textField;
         
+        System.Double[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Double[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
+        System.Single[] cacheOfValuesAsFloats;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Single[] ValuesAsFloats {
             get {
+                if (cacheOfValuesAsFloats != null) return cacheOfValuesAsFloats;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValuesAsFloats = values;
+                return cacheOfValuesAsFloats;
             }
         }
         
@@ -10487,26 +10562,36 @@
         
         private string textField;
         
+        System.Double[] cacheOfValues;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Double[] Values {
             get {
+                if (cacheOfValues != null) return cacheOfValues;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Double[] values = new System.Double[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Double.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValues = values;
+                return cacheOfValues;
             }
         }
+        System.Single[] cacheOfValuesAsFloats;
+        
         [System.Xml.Serialization.XmlIgnore]
         public System.Single[] ValuesAsFloats {
             get {
+                if (cacheOfValuesAsFloats != null) return cacheOfValuesAsFloats;
+                
                 string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);
                 System.Single[] values = new System.Single[txts.Length];
                 for(int i = 0; i < txts.Length; i++) {
                     values[i] = System.Single.Parse(txts[i], System.Globalization.CultureInfo.InvariantCulture);
                 }
-                return values;
+                cacheOfValuesAsFloats = values;
+                return cacheOfValuesAsFloats;
             }
         }
         

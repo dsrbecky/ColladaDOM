@@ -16,9 +16,13 @@ namespace xsd2net
 	public class FixXmlTextAttributeExtension : Extension
 	{
 		string codeStart = 
+			@"        TValue[] cacheOfNAME;" + "\r\n" +
+			@"        " + "\r\n" +
 			@"        [System.Xml.Serialization.XmlIgnore]" + "\r\n" +
 			@"        public TValue[] NAME {" + "\r\n" +
-			@"            get {" + "\r\n";
+			@"            get {" + "\r\n" +
+			@"                if (cacheOfNAME != null) return cacheOfNAME;" + "\r\n" +
+			@"                " + "\r\n";
 		
 		string genericBody = 
 			@"                string[] txts = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);" + "\r\n" +
@@ -26,10 +30,12 @@ namespace xsd2net
 			@"                for(int i = 0; i < txts.Length; i++) {" + "\r\n" +
 			@"                    values[i] = TValue.Parse(txts[i]CULTURE);" + "\r\n" +
 			@"                }" + "\r\n" +
-			@"                return values;" + "\r\n";
+			@"                cacheOfNAME = values;" + "\r\n" +
+			@"                return cacheOfNAME;" + "\r\n";
 			
 		string stringBody = 
-			@"                return this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);" + "\r\n";
+			@"                cacheOfNAME = this.Text.Split(new char[]{' '}, System.StringSplitOptions.RemoveEmptyEntries);" + "\r\n" +
+			@"                return cacheOfNAME;" + "\r\n";
 			
 		string codeEnd = 
 			@"            }" + "\r\n" +
