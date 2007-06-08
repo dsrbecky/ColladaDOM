@@ -25,7 +25,7 @@ namespace Collada
 			Gl.glScaled(GlobalSettings.GlobalScale, GlobalSettings.GlobalScale, GlobalSettings.GlobalScale);
 			
 			// Setup camera
-			using(PerformanceLog log2 = new PerformanceLog("Setup camera")) {
+			using(new PerformanceLog("Setup camera")) {
 				List<InstanceWithExtra> cameras = new List<InstanceWithExtra>();
 				List<Node> nodePath = new List<Node>();
 				foreach(Node node in this.Node) {
@@ -41,7 +41,7 @@ namespace Collada
 			}
 			
 			// Setup lights
-			using(PerformanceLog log2 = new PerformanceLog("Setup lights")) {
+			using(new PerformanceLog("Setup lights")) {
 				int lightCount = 0;
 				foreach(Node node in this.Node) {
 					node.SetupLights(ref lightCount);
@@ -49,7 +49,7 @@ namespace Collada
 			}
 			
 			// Render
-			using(PerformanceLog log2 = new PerformanceLog("Render")) {
+			using(new PerformanceLog("Render")) {
 				foreach(Node node in this.Node) {
 					node.Render();
 				}

@@ -71,6 +71,7 @@
     <Compile Include="Math\Triangle.cs" />
     <Compile Include="Math\Vector.cs" />
     <Compile Include="Util\HighPrecisionTimer.cs" />
+    <Compile Include="Util\LogType.cs" />
     <Compile Include="Util\PerformanceLog.cs" />
     <Compile Include="Util\Texture.cs" />
     <Compile Include="Util\Utils.cs" />

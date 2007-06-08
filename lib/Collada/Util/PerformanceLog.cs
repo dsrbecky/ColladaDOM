@@ -4,6 +4,8 @@
 // </file>
 
 using System;
+using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,6 +17,7 @@ namespace Collada.Util
 		static PerformanceLog current;
 		
 		string description;
+		LogType logType;
 		int level;
 		DateTime startTime;
 		DateTime endTime;
@@ -39,6 +42,12 @@ namespace Collada.Util
 			}
 		}
 		
+		public LogType LogType {
+			get {
+				return logType;
+			}
+		}
+		
 		static PerformanceLog()
 		{
 			current = null;
@@ -46,9 +55,15 @@ namespace Collada.Util
 			current = Root;
 		}
 		
-		public PerformanceLog(string description)
+		public PerformanceLog(string description): this(description, LogType.Default)
+		{
+			
+		}
+		
+		public PerformanceLog(string description, LogType logType)
 		{
 			this.description = description;
+			this.logType = logType;
 			this.startTime = HighPrecisionTimer.Now;
 			this.parent = current;
 			current = this;
@@ -69,6 +84,11 @@ namespace Collada.Util
 		{
 			endTime = HighPrecisionTimer.Now;
 			current = parent;
+			if (this.LogType == LogType.Loading) {
+				string msg = String.Format("PerfLog: {0} ({1:f1} ms)", description, this.Duration.TotalMilliseconds);
+				System.Console.WriteLine(msg);
+				System.Diagnostics.Debug.WriteLine(msg);
+			}
 		}
 		
 		public static PerformanceLog Begin(string description)
@@ -92,6 +112,21 @@ namespace Collada.Util
 			                     time.TotalMilliseconds + " ms",
 			                     String.Format("{0:f0}%", fraction * 100),
 			                     new String(marker, (int)(fraction * 50)));
+		}
+		
+		public static void WriteLogFile()
+		{
+			WriteLogFile("PerformanceLog.txt");
+		}
+		
+		public static void WriteLogFile(string filename)
+		{
+			string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			string logFilename = Path.Combine(path, filename);
+			PerformanceLog.Root.Stop();
+			StreamWriter file = new StreamWriter(logFilename);
+			file.Write(PerformanceLog.Root.ToString());
+			file.Close();
 		}
 		
 		public override string ToString()

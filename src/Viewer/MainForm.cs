@@ -23,7 +23,6 @@ namespace Viewer
 	{
 		long framesRendered = 0;
 		
-		XmlSerializer serializer;
 		COLLADA collada;
 		
 		static DateTime startTime = DateTime.Now;
@@ -48,20 +47,12 @@ namespace Viewer
 		
 		~MainForm()
 		{
-			string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			string logFilename = Path.Combine(path, "PerformanceLog.txt");
-			PerformanceLog.Root.Stop();
-			StreamWriter file = new StreamWriter(logFilename);
-			file.Write(PerformanceLog.Root.ToString());
-			file.Close();
+			PerformanceLog.WriteLogFile();
 		}
 		
 		public void Show(string filename)
 		{
-			serializer = new XmlSerializer(typeof(COLLADA));
-			using(FileStream file = new FileStream(filename, FileMode.Open)) {
-				collada = (COLLADA)serializer.Deserialize(file);
-			}
+			collada = COLLADA.Load(filename);
 			
 			Glut.glutInit();
 			Glut.glutInitDisplayMode(Glut.GLUT_DOUBLE | Glut.GLUT_RGB | Glut.GLUT_DEPTH);
@@ -95,18 +86,18 @@ namespace Viewer
 		{
 			GlobalSettings.RunningTime = DateTime.Now - startTime;
 			using(PerformanceLog log = new PerformanceLog("Frame " + (framesRendered++))) {
-				using(PerformanceLog log2 = new PerformanceLog("Clear")) {
+				using(new PerformanceLog("Clear")) {
 					Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 				}
 				
 				Gl.glMatrixMode(Gl.GL_MODELVIEW);
 				Gl.glLoadIdentity();
 				
-				using(PerformanceLog log2 = new PerformanceLog("Render")) {
+				using(new PerformanceLog("Render")) {
 					collada.Render();
 				}
 				
-				using(PerformanceLog log2 = new PerformanceLog("Swap")) {
+				using(new PerformanceLog("Swap")) {
 					Glut.glutSwapBuffers();
 				}
 				
