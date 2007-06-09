@@ -29,11 +29,31 @@ namespace Collada
 			}
 		}
 		
+		public static COLLADA LastCreatedCollada;
+		
+		string filename;
+		
+		public COLLADA()
+		{
+			LastCreatedCollada = this;
+		}
+		
+		public string Filename {
+			get { return filename; }
+		}
+		
+		public string Directory {
+			get {
+				return Path.GetDirectoryName(filename);
+			}
+		}
+		
 		public static COLLADA Load(string filename)
 		{
 			using(new PerformanceLog("Load xml file: " + filename, LogType.Loading)) {
 				FileStream file = new FileStream(filename, FileMode.Open);
 				COLLADA colladaDocument = (COLLADA)Serializer.Deserialize(file);
+				colladaDocument.filename = filename;
 				file.Close();
 				return colladaDocument;
 			}

@@ -15,6 +15,8 @@ namespace Collada.Util
 {
 	public class Texture
 	{
+		public static string TexturePath = @"";
+		
 		static Dictionary<String, Texture> textureCache = new Dictionary<String, Texture>();
 		
 		int textureName;
@@ -44,8 +46,8 @@ namespace Collada.Util
 					
 					// Load image
 					Il.ilBindImage(1);
-					Il.ilLoadImage(name);
-					Ilu.iluFlipImage();
+					Il.ilLoadImage(Path.Combine(TexturePath, name));
+					//Ilu.iluFlipImage();
 					Ilut.ilutGLBuildMipmaps();
 					
 					Texture texture = new Texture(texNames[0], 0, 0); // TODO: 0,0

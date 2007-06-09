@@ -80,6 +80,8 @@ namespace Viewer
 			
 			Il.ilInit();
 			Ilut.ilutRenderer(Ilut.ILUT_OPENGL);
+			
+			Texture.TexturePath = @"..\sample_data\";
 		}
 		
 		void Display()
