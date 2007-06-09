@@ -47,7 +47,7 @@ namespace Collada
 				CommonColorOrTextureTypeTexture texture = phong.Diffuse.Item as CommonColorOrTextureTypeTexture;
 				if (AutoTextureFilename != null) {
 					Texture tex = Texture.Load(AutoTextureFilename);
-					tex.Bind();
+					if (tex != null) tex.Bind();
 				} else if (color != null) {
 					Gl.glDisable(Gl.GL_TEXTURE_2D);
 					Gl.glColor4fv(color.ValuesAsFloats);
@@ -74,7 +74,7 @@ namespace Collada
 					Image image = Image.IDs[surface.InitFrom[0].Value];
 					
 					Texture tex = Texture.Load((string)image.Item);
-					tex.Bind();
+					if (tex != null) tex.Bind();
 				}
 				
 				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION , ((CommonColorOrTextureTypeColor)phong.Emission.Item).ValuesAsFloats);

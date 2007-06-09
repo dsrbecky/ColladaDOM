@@ -15,7 +15,7 @@ namespace Collada.Util
 {
 	public class Texture
 	{
-		public static string TexturePath = @"";
+		public static string[] TexturePaths = new string[]{@""};
 		
 		static Dictionary<String, Texture> textureCache = new Dictionary<String, Texture>();
 		
@@ -44,13 +44,27 @@ namespace Collada.Util
 					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
 					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 					
+					string texturePath = "";
+					foreach(string t in TexturePaths) {
+						texturePath = Path.Combine(t, name);
+						if (File.Exists(texturePath)) break;
+					}
+					
+					if (!File.Exists(texturePath)) {
+						System.Console.WriteLine("Can not find texture {0}", name);
+						return null;
+					}
+					
 					// Load image
 					Il.ilBindImage(1);
-					Il.ilLoadImage(Path.Combine(TexturePath, name));
+					Il.ilLoadImage(texturePath);
 					//Ilu.iluFlipImage();
 					Ilut.ilutGLBuildMipmaps();
 					
-					Texture texture = new Texture(texNames[0], 0, 0); // TODO: 0,0
+					int height = Il.ilGetInteger(Il.IL_IMAGE_HEIGHT);
+					int width  = Il.ilGetInteger(Il.IL_IMAGE_WIDTH);
+					
+					Texture texture = new Texture(texNames[0], height, width);
 					textureCache[name] = texture;
 					return texture;
 				}
