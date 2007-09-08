@@ -24,15 +24,23 @@ namespace Collada
 			collada = COLLADA.LastCreatedCollada;
 		}
 		
+		bool autoTextureFilenameSet = false;
+		string autoTextureFilename;
+		
 		string AutoTextureFilename {
 			get {
-				string imageFilename = Path.GetFileNameWithoutExtension(collada.Filename) + ".png";
-				string path = Path.Combine(collada.Directory, imageFilename);
-				if (File.Exists(path)) {
-					return path;
-				} else {
-					return null;
+				if (!autoTextureFilenameSet) {
+					string imageFilename = Path.GetFileNameWithoutExtension(collada.Filename) + ".png";
+					string path = Path.Combine(collada.Directory, imageFilename);
+					if (File.Exists(path)) {
+						autoTextureFilename = path;
+						autoTextureFilenameSet = true;
+					} else {
+						autoTextureFilename = null;
+						autoTextureFilenameSet = true;
+					}
 				}
+				return autoTextureFilename;
 			}
 		}
 		
